@@ -999,7 +999,7 @@ Admin Panel দেখান / লুকান
 <div class="notice">
 
 <b>নোট:</b>
-এই HTML সংস্করণে রেজাল্ট ব্রাউজারের LocalStorage-এ সংরক্ষিত হবে। যোগ করা রেজাল্ট "সকল রেজাল্ট" অংশে সংশ্লিষ্ট শ্রেণির নামের মধ্যে দেখা যাবে।
+রেজাল্ট এখন থেকে ওয়েবসাইটের নিজস্ব (persistent) স্টোরেজে সংরক্ষিত হবে — অর্থাৎ যেকোনো ব্রাউজার বা ডিভাইস থেকে ভিজিট করলে সবাই একই রেজাল্ট দেখতে পাবে। যোগ করা রেজাল্ট "সকল রেজাল্ট" অংশে সংশ্লিষ্ট শ্রেণির নামের মধ্যে দেখা যাবে।
 
 </div>
 
@@ -1171,19 +1171,55 @@ subjects:[
 
 
 /* =========================
-   Local Storage
+   Persistent Storage (ওয়েবসাইটের নিজস্ব স্টোরেজ)
+   -- localStorage এর বদলে window.storage ব্যবহার করা হচ্ছে,
+      এতে সব ভিজিটর/ব্রাউজার/ডিভাইসে একই ডেটা দেখা যাবে।
 ========================= */
 
-let students =
-JSON.parse(
-localStorage.getItem("madrasa_students")
-)
-||
-defaultStudents;
-
+let students = defaultStudents;
 
 /* বর্তমানে কোন শ্রেণির রেজাল্ট দেখানো হচ্ছে (রিফ্রেশের জন্য) */
 let currentOpenClass = null;
+
+async function loadStudents(){
+
+    try{
+
+        const list = await window.fbLoadStudents();
+
+        if(list){
+
+            students = list;
+
+        }
+
+    }catch(e){
+
+        console.error("রেজাল্ট লোড করা যায়নি:", e);
+
+        /* এখনো কোনো ডেটা সেভ করা হয়নি বলে ডিফল্ট ডেমো ডেটা ব্যবহার হচ্ছে */
+
+        students = defaultStudents;
+
+    }
+
+}
+
+async function saveStudents(){
+
+    try{
+
+        await window.fbSaveStudents(students);
+
+    }catch(e){
+
+        console.error("রেজাল্ট সেভ করা যায়নি:", e);
+
+        alert("রেজাল্ট সেভ করতে সমস্যা হয়েছে, আবার চেষ্টা করুন। (Firebase কনসোলে Firestore Rules ঠিক আছে কিনা দেখুন)");
+
+    }
+
+}
 
 
 /* কোনো মেনু অপশনে ক্লিক করলে মোবাইল মেনু বন্ধ হয়ে যাবে */
@@ -1301,7 +1337,7 @@ Number(item[1]) < 33
    Initialize
 ========================= */
 
-function init(){
+async function init(){
 
 document.getElementById("year")
 .textContent =
@@ -1342,6 +1378,15 @@ document.getElementById(
 ).appendChild(option);
 
 });
+
+
+/* ডেটা লোড হওয়ার আগে সাময়িক লোডিং মেসেজ দেখানো */
+
+document.getElementById("classGrid").innerHTML =
+`<div class="class-empty">লোড হচ্ছে...</div>`;
+
+
+await loadStudents();
 
 
 renderClassGrid();
@@ -1761,12 +1806,58 @@ behavior:"smooth"
    Admin
 ========================= */
 
+const ADMIN_PASSWORD = "Arif2710";
+
+let adminUnlocked = false;
+
 function toggleAdmin(){
 
-document.getElementById(
-"adminPanel"
-)
-.classList.toggle("show");
+const panel =
+document.getElementById("adminPanel");
+
+
+/* প্যানেল যদি ইতিমধ্যে খোলা থাকে, তাহলে শুধু বন্ধ করে দেওয়া হবে (পাসওয়ার্ড লাগবে না) */
+
+if(panel.classList.contains("show")){
+
+panel.classList.remove("show");
+
+return;
+
+}
+
+
+if(adminUnlocked){
+
+panel.classList.add("show");
+
+return;
+
+}
+
+
+let entered = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
+
+
+if(entered === null){
+
+return;
+
+}
+
+
+if(entered === ADMIN_PASSWORD){
+
+adminUnlocked = true;
+
+panel.classList.add("show");
+
+}
+else{
+
+alert("পাসওয়ার্ড ভুল হয়েছে।");
+
+}
 
 }
 
@@ -1775,15 +1866,9 @@ document.getElementById(
    Save
 ========================= */
 
-function save(){
+async function save(){
 
-localStorage.setItem(
-
-"madrasa_students",
-
-JSON.stringify(students)
-
-);
+await saveStudents();
 
 renderClassGrid();
 
@@ -1803,7 +1888,7 @@ showClassResults(currentOpenClass);
    Add Student
 ========================= */
 
-function addStudent(){
+async function addStudent(){
 
 let name =
 document.getElementById(
@@ -1895,7 +1980,7 @@ subjects:subjects
 });
 
 
-save();
+await save();
 
 
 alert(
@@ -1936,7 +2021,59 @@ document.getElementById(
    Start
 ========================= */
 
-init();
+/* init() এখন নিচের Firebase module script কল করবে,
+   যাতে ডেটাবেজ প্রস্তুত হওয়ার পরেই সাইট লোড শুরু হয় */
+
+</script>
+
+
+<!-- =========================
+     FIREBASE (ডেটা এখন এখানে সেভ থাকবে)
+========================= -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBLMTDXNY50YLrII9d8sTif7woXh707hXU",
+    authDomain: "musmm-69b10.firebaseapp.com",
+    projectId: "musmm-69b10",
+    storageBucket: "musmm-69b10.firebasestorage.app",
+    messagingSenderId: "341478120719",
+    appId: "1:341478120719:web:47ea2771a449c13f66b27a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const studentsDocRef = doc(db, "site_data", "students");
+
+/* সব শিক্ষার্থীর রেজাল্ট একটা JSON হিসেবে একটাই ডকুমেন্টে সেভ/লোড করা হয় */
+
+window.fbLoadStudents = async function(){
+
+    const snap = await getDoc(studentsDocRef);
+
+    if(snap.exists() && snap.data().json){
+
+        return JSON.parse(snap.data().json);
+
+    }
+
+    return null;
+
+};
+
+window.fbSaveStudents = async function(list){
+
+    await setDoc(studentsDocRef, { json: JSON.stringify(list) });
+
+};
+
+/* Firebase প্রস্তুত হয়ে গেলে এখন সাইট চালু করা হচ্ছে */
+
+window.init();
 
 </script>
 
