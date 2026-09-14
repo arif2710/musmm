@@ -133,6 +133,17 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 
 /* CERTIFICATE (print only) */
 #certificateArea{ display:none; }
+#classPrintArea{ display:none; }
+
+.class-print-page{ padding:10px; }
+.class-print-head{ text-align:center; margin-bottom:18px; }
+.class-print-head .arabic{ font-family:Amiri,serif; font-size:20px; color:#07543f; direction:rtl; }
+.class-print-head h2{ color:#063e30; font-size:18px; margin:4px 0 2px; }
+.class-print-head p{ color:#596c65; font-size:12px; }
+.class-print-head h3{ color:#07543f; margin-top:10px; font-size:15px; }
+.class-print-table{ width:100%; border-collapse:collapse; font-size:12px; }
+.class-print-table th{ background:#07543f; color:#fff; padding:7px 5px; }
+.class-print-table td{ padding:6px 5px; border-bottom:1px solid #dbe9e3; text-align:center; }
 
 .cert-page{
   --gold:#a9832c; --gold-soft:#d9c48f; --emerald:#07543f; --emerald-dark:#043c2e;
@@ -216,15 +227,25 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
   .total span{ font-size:12px; padding:7px 10px; }
 }
 
-/* PRINT: only the certificate shows.
-   We remove every other section from the flow with display:none (not just
-   visibility:hidden) so the certificate becomes the only content on the
-   page and its width is governed by the page's own printable area instead
-   of a fixed/absolute box that can spill outside the frame. */
+/* PRINT
+   Two distinct print modes, each isolating exactly one container so the
+   printed page is never mixed with hidden site chrome (which is what was
+   causing both the overflow and the earlier blank-page issue):
+   - body.printing-cert   -> only #certificateArea prints (single result)
+   - body.printing-class  -> only #classPrintArea prints (whole class list)
+   display:none (not visibility:hidden) removes the rest from the flow
+   entirely, so the printed container's width is governed by the page's
+   own printable area instead of a fixed/absolute box that can spill out. */
 @media print{
-  body > *:not(#certificateArea){ display:none !important; }
   body{ background:#fff; }
-  #certificateArea{ display:block; font-family:"Noto Sans Bengali",sans-serif; }
+  .no-print{ display:none !important; }
+
+  body.printing-cert > *:not(#certificateArea){ display:none !important; }
+  body.printing-cert #certificateArea{ display:block !important; font-family:"Noto Sans Bengali",sans-serif; }
+
+  body.printing-class > *:not(#classPrintArea){ display:none !important; }
+  body.printing-class #classPrintArea{ display:block !important; font-family:"Noto Sans Bengali",sans-serif; }
+
   @page{ margin:12mm; }
 }
 </style>
@@ -321,7 +342,7 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <div class="class-result-view" id="classResultView">
 <div class="class-result-head">
 <h3 id="classResultTitle"></h3>
-<button class="no-print" onclick="window.print()">🖨️ প্রিন্ট</button>
+<button class="no-print" onclick="printClassList()">🖨️ প্রিন্ট</button>
 </div>
 <div class="table-wrap">
 <table>
@@ -394,6 +415,9 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 
 <!-- CERTIFICATE TEMPLATE (only visible when printing a single result) -->
 <div id="certificateArea"></div>
+
+<!-- CLASS LIST PRINT TEMPLATE (only visible when printing a whole class) -->
+<div id="classPrintArea"></div>
 
 <script>
 const classes = ["নার্সারি","১ম শ্রেণী","২য় শ্রেণী","৩য় শ্রেণী","৪র্থ শ্রেণী","৫ম শ্রেণী","৬ষ্ঠ শ্রেণী","৭ম শ্রেণী","৮ম শ্রেণী","৯ম শ্রেণী","হিফজ"];
@@ -551,7 +575,7 @@ function searchResults(){
   }
 
   let found = students.filter(student =>
-    String(student.roll).toLowerCase().includes(roll) &&
+    String(student.roll).toLowerCase() === roll &&
     student.className === className
   );
 
@@ -605,6 +629,52 @@ function showResult(id){
     </div>`;
 
   document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
+}
+
+/* ========== PRINT HELPERS ========== */
+/* Marks which single container should be visible for this print job, then
+   removes the mark again once the print dialog closes (or on the next tick
+   for browsers that never fire afterprint), so a later normal page view or
+   a different print job is never left showing the wrong container. */
+function startPrint(mode){
+  document.body.classList.add(mode);
+  window.print();
+}
+window.addEventListener("afterprint", function(){
+  document.body.classList.remove("printing-cert", "printing-class");
+});
+
+/* ========== CLASS LIST PRINT ========== */
+function printClassList(){
+  if(!currentOpenClass) return;
+  let list = students.filter(s => s.className === currentOpenClass);
+
+  const rows = list.map((student, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td style="text-align:left;">${student.name}</td>
+      <td>${student.roll}</td>
+      <td>${student.dept}</td>
+      <td>${total(student)}</td>
+      <td>${gpa(student)}</td>
+      <td>${status(student)}</td>
+    </tr>`).join("");
+
+  document.getElementById("classPrintArea").innerHTML = `
+    <div class="class-print-page">
+      <div class="class-print-head">
+        <div class="arabic">مدرسة مركز العلوم السلفية للبنات</div>
+        <h2>মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</h2>
+        <p>শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা</p>
+        <h3>${currentOpenClass} — সকল ছাত্রীর রেজাল্ট</h3>
+      </div>
+      <table class="class-print-table">
+        <thead><tr><th>ক্রমিক</th><th style="text-align:left;">নাম</th><th>রোল</th><th>বিভাগ</th><th>মোট</th><th>GPA</th><th>ফলাফল</th></tr></thead>
+        <tbody>${rows || `<tr><td colspan="7">এই শ্রেণিতে কোনো রেজাল্ট পাওয়া যায়নি</td></tr>`}</tbody>
+      </table>
+    </div>`;
+
+  startPrint("printing-class");
 }
 
 /* ========== CERTIFICATE (unique ijazah-style marksheet) ========== */
@@ -700,7 +770,7 @@ function printCertificate(id){
       </div>
     </div>`;
 
-  window.print();
+  startPrint("printing-cert");
 }
 
 /* ========== ADMIN LOGIN (modal instead of prompt) ========== */
