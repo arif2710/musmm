@@ -151,12 +151,6 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 .cert-corner.bl{ bottom:6px; left:6px; transform:scaleY(-1); }
 .cert-corner.br{ bottom:6px; right:6px; transform:scale(-1,-1); }
 
-.cert-topline{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; text-align:left; font-size:10.5px; color:var(--gold); letter-spacing:.3px; margin:2px 4px 0; }
-
-.cert-scale{ border-collapse:collapse; font-size:9.5px; }
-.cert-scale th, .cert-scale td{ border:1px solid var(--gold-soft); padding:2px 6px; color:var(--ink); }
-.cert-scale th{ background:#fdf6e6; color:var(--emerald-dark); font-weight:700; }
-
 .cert-title-arabic{ font-family:Amiri,serif; font-size:20px; color:var(--emerald); direction:rtl; margin-top:10px; }
 .cert-title-bn{ font-size:18px; font-weight:800; color:var(--emerald-dark); margin-top:4px; }
 .cert-addr{ font-size:10.5px; color:#6c7a72; margin-top:2px; letter-spacing:.2px; }
@@ -635,8 +629,6 @@ function printCertificate(id){
     </tr>`).join("");
 
   const passed = status(student) === "উত্তীর্ণ";
-  const serial = `MUS-${student.year}-${student.roll}`;
-  const today = new Date().toLocaleDateString('bn-BD');
 
   document.getElementById("certificateArea").innerHTML = `
     <div class="cert-page">
@@ -646,25 +638,6 @@ function printCertificate(id){
           <div class="cert-corner tr">${certCornerSVG()}</div>
           <div class="cert-corner bl">${certCornerSVG()}</div>
           <div class="cert-corner br">${certCornerSVG()}</div>
-
-          <div class="cert-topline">
-            <div>
-              সনদ নং: ${serial}<br>
-              তারিখ: ${today}
-            </div>
-            <table class="cert-scale">
-              <thead><tr><th>গ্রেড</th><th>নম্বর সীমা</th><th>পয়েন্ট</th></tr></thead>
-              <tbody>
-                <tr><td>A+</td><td>80-100</td><td>5</td></tr>
-                <tr><td>A</td><td>70-79</td><td>4</td></tr>
-                <tr><td>A-</td><td>60-69</td><td>3.5</td></tr>
-                <tr><td>B</td><td>50-59</td><td>3</td></tr>
-                <tr><td>C</td><td>40-49</td><td>2</td></tr>
-                <tr><td>D</td><td>33-39</td><td>1</td></tr>
-                <tr><td>F</td><td>00-32</td><td>0</td></tr>
-              </tbody>
-            </table>
-          </div>
 
           <div class="cert-title-arabic">مدرسة مركز العلوم السلفية للبنات</div>
           <div class="cert-title-bn">মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</div>
@@ -892,4 +865,3 @@ window.init();
 
 </body>
 </html>
-
