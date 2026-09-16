@@ -68,27 +68,6 @@ button{ border:0; border-radius:9px; padding:12px 18px; background:#087f5b; colo
 button:hover{ background:#064e3b; }
 button:active{ transform:scale(.97); }
 
-/* TABLE */
-.table-wrap{ overflow:auto; background:white; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,.07); }
-table{ width:100%; border-collapse:collapse; min-width:650px; }
-th, td{ padding:12px; border-bottom:1px solid #e4eee9; text-align:center; }
-th{ background:#07543f; color:white; }
-tr:hover td{ background:#f5faf7; }
-
-/* CLASS CARDS */
-.class-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-.class-card{ background:white; border:1px solid #e1eee8; border-radius:15px; padding:20px 15px; text-align:center; cursor:pointer; transition:transform .2s, box-shadow .2s, background .2s; }
-.class-card:hover{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(7,84,63,.13); background:#f6fbf8; }
-.class-card.active{ background:#07543f; color:white; border-color:#07543f; }
-.class-card .cname{ font-weight:700; font-size:16px; }
-.class-card .ccount{ margin-top:6px; font-size:13px; color:#6c8479; }
-.class-card.active .ccount{ color:#d8ece4; }
-.class-empty{ text-align:center; color:#7c8b85; padding:20px; }
-.class-result-view{ margin-top:28px; display:none; }
-.class-result-view.show{ display:block; }
-.class-result-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px; }
-.class-result-head h3{ color:#07543f; font-size:22px; }
-
 /* RESULT CARD (on-screen, responsive so no zoom needed) */
 .result-card{ margin-top:25px; background:white; border-radius:18px; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,.08); }
 .result-head{ display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #e5eee9; padding-bottom:15px; flex-wrap:wrap; gap:10px; }
@@ -100,6 +79,20 @@ tr:hover td{ background:#f5faf7; }
 .result-table th, .result-table td{ border:1px solid #dbe9e3; padding:8px 6px; white-space:nowrap; }
 .total{ display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:16px; }
 .total span{ background:#eff8f4; padding:8px 13px; border-radius:9px; font-weight:700; font-size:13px; }
+
+/* TABLE (used by admin result list) */
+.table-wrap{ overflow:auto; background:white; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,.07); }
+table{ width:100%; border-collapse:collapse; min-width:650px; }
+th, td{ padding:12px; border-bottom:1px solid #e4eee9; text-align:center; }
+th{ background:#07543f; color:white; }
+tr:hover td{ background:#f5faf7; }
+
+/* ADMIN RESULT LIST (delete) */
+.admin-list{ margin-top:24px; }
+.admin-list h4{ color:#07543f; margin-bottom:10px; font-size:16px; }
+.admin-list-filters{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+button.btn-del{ background:#c0392b; padding:8px 12px; font-size:12px; }
+button.btn-del:hover{ background:#96281b; }
 
 /* CONTACT */
 .contact{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
@@ -133,17 +126,6 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 
 /* CERTIFICATE (print only) */
 #certificateArea{ display:none; }
-#classPrintArea{ display:none; }
-
-.class-print-page{ padding:10px; }
-.class-print-head{ text-align:center; margin-bottom:18px; }
-.class-print-head .arabic{ font-family:Amiri,serif; font-size:20px; color:#07543f; direction:rtl; }
-.class-print-head h2{ color:#063e30; font-size:18px; margin:4px 0 2px; }
-.class-print-head p{ color:#596c65; font-size:12px; }
-.class-print-head h3{ color:#07543f; margin-top:10px; font-size:15px; }
-.class-print-table{ width:100%; border-collapse:collapse; font-size:12px; }
-.class-print-table th{ background:#07543f; color:#fff; padding:7px 5px; }
-.class-print-table td{ padding:6px 5px; border-bottom:1px solid #dbe9e3; text-align:center; }
 
 .cert-page{
   --gold:#a9832c; --gold-soft:#d9c48f; --emerald:#07543f; --emerald-dark:#043c2e;
@@ -156,9 +138,9 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 }
 .cert-inner{
   position:relative; width:100%; box-sizing:border-box;
-  border:1px solid var(--gold-soft); padding:26px 30px 22px; text-align:center;
+  border:1px solid var(--gold-soft); padding:22px 26px 20px; text-align:center;
   background:
-    radial-gradient(circle at 50% 42%, rgba(7,84,63,.045), transparent 60%),
+    radial-gradient(circle at 50% 38%, rgba(7,84,63,.045), transparent 60%),
     var(--ivory);
   overflow:hidden;
 }
@@ -169,38 +151,41 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 .cert-corner.bl{ bottom:6px; left:6px; transform:scaleY(-1); }
 .cert-corner.br{ bottom:6px; right:6px; transform:scale(-1,-1); }
 
-.cert-serial{ position:absolute; top:12px; right:56px; font-size:10px; color:var(--gold); letter-spacing:.4px; }
-.cert-serial-l{ position:absolute; top:12px; left:56px; font-size:10px; color:var(--gold); letter-spacing:.4px; }
+.cert-topline{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; text-align:left; font-size:10.5px; color:var(--gold); letter-spacing:.3px; margin:2px 4px 0; }
 
-.cert-arabic{ font-family:Amiri,serif; font-size:23px; color:var(--emerald); direction:rtl; margin-top:6px; }
-.cert-name-bn{ font-size:19px; font-weight:800; color:var(--emerald-dark); margin-top:6px; }
-.cert-addr{ font-size:11px; color:#6c7a72; margin-top:3px; letter-spacing:.2px; }
+.cert-scale{ border-collapse:collapse; font-size:9.5px; }
+.cert-scale th, .cert-scale td{ border:1px solid var(--gold-soft); padding:2px 6px; color:var(--ink); }
+.cert-scale th{ background:#fdf6e6; color:var(--emerald-dark); font-weight:700; }
 
-.cert-ribbon{ display:inline-flex; align-items:center; gap:10px; margin:18px 0 20px; }
-.cert-ribbon .line{ width:56px; height:1px; background:var(--gold); }
-.cert-ribbon .word{ font-size:16px; font-weight:700; color:var(--gold); letter-spacing:3px; }
+.cert-title-arabic{ font-family:Amiri,serif; font-size:20px; color:var(--emerald); direction:rtl; margin-top:10px; }
+.cert-title-bn{ font-size:18px; font-weight:800; color:var(--emerald-dark); margin-top:4px; }
+.cert-addr{ font-size:10.5px; color:#6c7a72; margin-top:2px; letter-spacing:.2px; }
+.cert-exam{ font-size:13px; font-weight:700; color:var(--gold); margin-top:8px; letter-spacing:.5px; }
 
-.cert-body{ display:flex; gap:22px; align-items:flex-start; text-align:left; }
-.cert-seal{ flex:0 0 auto; width:92px; height:92px; }
-.cert-seal svg{ width:100%; height:100%; display:block; }
-.cert-info{ flex:1; }
-.cert-info-row{ display:flex; justify-content:space-between; gap:12px; padding:5px 0; border-bottom:1px dashed #d9e4dd; font-size:12.5px; }
-.cert-info-row b{ color:var(--emerald-dark); font-weight:700; }
+.cert-ribbon{ display:inline-flex; align-items:center; gap:10px; margin:14px 0 16px; }
+.cert-ribbon .line{ width:50px; height:1px; background:var(--gold); }
+.cert-ribbon .word{ font-size:14px; font-weight:700; color:var(--gold); letter-spacing:2.5px; }
+
+.cert-info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 22px; text-align:left; }
+.cert-info-row{ display:flex; gap:8px; padding:5px 0; border-bottom:1px dashed #d9e4dd; font-size:12px; }
+.cert-info-row b{ color:var(--emerald-dark); font-weight:700; min-width:112px; flex:0 0 auto; }
 .cert-info-row span.val{ color:var(--ink); font-weight:600; }
+.cert-info-row.full{ grid-column:1 / -1; }
 
-.cert-table-wrap{ margin-top:20px; }
-.cert-table{ width:100%; border-collapse:collapse; table-layout:fixed; font-size:12.5px; }
-.cert-table th{ background:var(--emerald); color:#fff; padding:8px 6px; font-weight:700; letter-spacing:.3px; }
-.cert-table td{ padding:7px 6px; border-bottom:1px solid #e3ede7; color:var(--ink); }
+.cert-table-wrap{ margin-top:18px; }
+.cert-table{ width:100%; border-collapse:collapse; table-layout:fixed; font-size:12px; }
+.cert-table th{ background:var(--emerald); color:#fff; padding:7px 6px; font-weight:700; letter-spacing:.3px; }
+.cert-table td{ padding:6px 6px; border-bottom:1px solid #e3ede7; color:var(--ink); }
 .cert-table tr:last-child td{ border-bottom:none; }
 
-.cert-summary{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:20px 0 6px; }
-.cert-pill{ border:1px solid var(--gold-soft); color:var(--emerald-dark); font-weight:700; font-size:12px; padding:6px 14px; border-radius:3px; background:#fffdf7; }
+.cert-summary{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+.cert-pill{ border:1px solid var(--gold-soft); color:var(--emerald-dark); font-weight:700; font-size:11.5px; padding:6px 13px; border-radius:3px; background:#fffdf7; }
 .cert-pill.pass{ border-color:var(--emerald); }
+.cert-pill.fail{ border-color:#c0392b; color:#c0392b; }
 
-.cert-foot{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:44px; font-size:11.5px; color:var(--ink); }
+.cert-foot{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:38px; font-size:11px; color:var(--ink); }
 .cert-sign{ width:150px; border-top:1px solid #9aa9a1; padding-top:6px; text-align:center; }
-.cert-stamp{ width:74px; height:74px; border:1px dashed var(--gold-soft); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--gold); text-align:center; line-height:1.3; }
+.cert-stamp{ width:70px; height:70px; border:1px dashed var(--gold-soft); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--gold); text-align:center; line-height:1.3; }
 
 /* MOBILE */
 @media(max-width:800px){
@@ -211,16 +196,16 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
   .search-grid{ grid-template-columns:1fr 1fr; }
   .contact{ grid-template-columns:1fr; }
   .admin-form{ grid-template-columns:1fr 1fr; }
+  .admin-list-filters{ grid-template-columns:1fr 1fr; }
   .hero h1{ font-size:27px; }
   .arabic{ font-size:29px; }
-  .class-grid{ grid-template-columns:repeat(2,1fr); }
+  .cert-info-grid{ grid-template-columns:1fr; }
 }
 @media(max-width:500px){
-  .search-grid, .admin-form{ grid-template-columns:1fr; }
+  .search-grid, .admin-form, .admin-list-filters{ grid-template-columns:1fr; }
   .brand-bn{ font-size:14px; }
   .brand-en{ display:none; }
   .brand img{ width:52px; height:52px; }
-  .class-grid{ grid-template-columns:1fr 1fr; }
   .result-table{ font-size:12px; }
   .result-table th, .result-table td{ padding:6px 4px; }
   .student-name{ font-size:19px; }
@@ -228,23 +213,15 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 }
 
 /* PRINT
-   Two distinct print modes, each isolating exactly one container so the
-   printed page is never mixed with hidden site chrome (which is what was
-   causing both the overflow and the earlier blank-page issue):
-   - body.printing-cert   -> only #certificateArea prints (single result)
-   - body.printing-class  -> only #classPrintArea prints (whole class list)
-   display:none (not visibility:hidden) removes the rest from the flow
-   entirely, so the printed container's width is governed by the page's
-   own printable area instead of a fixed/absolute box that can spill out. */
+   Only #certificateArea prints; display:none removes everything else from
+   the flow entirely, so the printed container's width is governed by the
+   page's own printable area instead of a fixed/absolute box that can spill out. */
 @media print{
   body{ background:#fff; }
   .no-print{ display:none !important; }
 
   body.printing-cert > *:not(#certificateArea){ display:none !important; }
   body.printing-cert #certificateArea{ display:block !important; font-family:"Noto Sans Bengali",sans-serif; }
-
-  body.printing-class > *:not(#classPrintArea){ display:none !important; }
-  body.printing-class #classPrintArea{ display:block !important; font-family:"Noto Sans Bengali",sans-serif; }
 
   @page{ margin:12mm; }
 }
@@ -270,7 +247,6 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <a href="#about" onclick="closeMenu()">আমাদের সম্পর্কে</a>
 <a href="#departments" onclick="closeMenu()">বিভাগসমূহ</a>
 <a href="#result" onclick="closeMenu()">রেজাল্ট</a>
-<a href="#allResults" onclick="closeMenu()">সকল রেজাল্ট</a>
 <a href="#contact" onclick="closeMenu()">যোগাযোগ</a>
 </nav>
 </div>
@@ -325,6 +301,12 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <option value="হিফজ">হিফজ বিভাগ</option>
 </select>
 <input id="searchRoll" placeholder="রোল নম্বর">
+<select id="searchExamType">
+<option value="">পরীক্ষার ধরণ নির্বাচন</option>
+<option value="অর্ধ বার্ষিক">অর্ধ বার্ষিক পরীক্ষা</option>
+<option value="বার্ষিক">বার্ষিক পরীক্ষা</option>
+</select>
+<select id="searchYear"><option value="">সাল নির্বাচন</option></select>
 </div>
 <div class="captcha-row">
 <span class="captcha-num" id="captchaText">যাচাই: ২ + ৩ = ?</span>
@@ -333,23 +315,6 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 </div>
 <button style="width:100%;margin-top:14px;" onclick="searchResults()">🔎 সার্চ করুন</button>
 <div id="searchOutput"></div>
-</div>
-</section>
-
-<section class="container" id="allResults">
-<div class="section-title"><h2>📋 সকল শিক্ষার্থীর রেজাল্ট</h2><p>শ্রেণি নির্বাচন করে সেই শ্রেণির সকল শিক্ষার্থীর রেজাল্ট একসাথে দেখুন</p></div>
-<div class="class-grid" id="classGrid"></div>
-<div class="class-result-view" id="classResultView">
-<div class="class-result-head">
-<h3 id="classResultTitle"></h3>
-<button class="no-print" onclick="printClassList()">🖨️ প্রিন্ট</button>
-</div>
-<div class="table-wrap">
-<table>
-<thead><tr><th>ক্রমিক</th><th>নাম</th><th>রোল</th><th>বিভাগ</th><th>মোট</th><th>GPA</th><th>ফলাফল</th><th>দেখুন</th></tr></thead>
-<tbody id="classResultBody"></tbody>
-</table>
-</div>
 </div>
 </section>
 
@@ -374,18 +339,45 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <div class="search-box">
 <button onclick="toggleAdmin()">Admin Panel দেখান / লুকান</button>
 <div class="admin-panel" id="adminPanel">
-<div class="notice"><b>নোট:</b> রেজাল্ট এখন থেকে ওয়েবসাইটের নিজস্ব (persistent) স্টোরেজে সংরক্ষিত হবে — অর্থাৎ যেকোনো ব্রাউজার বা ডিভাইস থেকে ভিজিট করলে সবাই একই রেজাল্ট দেখতে পাবে। যোগ করা রেজাল্ট "সকল রেজাল্ট" অংশে সংশ্লিষ্ট শ্রেণির নামের মধ্যে দেখা যাবে।</div>
+<div class="notice"><b>নোট:</b> রেজাল্ট এখন থেকে ওয়েবসাইটের নিজস্ব (persistent) স্টোরেজে সংরক্ষিত হবে — অর্থাৎ যেকোনো ব্রাউজার বা ডিভাইস থেকে ভিজিট করলে সবাই একই রেজাল্ট দেখতে পাবে। প্রতিটি রেজাল্ট শ্রেণি, পরীক্ষার ধরণ (অর্ধ বার্ষিক/বার্ষিক) ও সাল অনুযায়ী আলাদাভাবে সংরক্ষিত হবে, তাই একই শিক্ষার্থীর ভিন্ন ভিন্ন পরীক্ষার রেজাল্ট আলাদাভাবে যোগ করা যাবে এবং শিক্ষার্থীরা রোল, শ্রেণি, পরীক্ষার ধরণ ও সাল মিলিয়ে সঠিক রেজাল্টটি সার্চ করে দেখতে পারবে।</div>
 <div class="admin-form">
 <input id="aName" placeholder="শিক্ষার্থীর নাম">
+<input id="aFather" placeholder="পিতার নাম">
+<input id="aMother" placeholder="মাতার নাম">
 <input id="aRoll" placeholder="রোল নম্বর">
 <select id="aClass"><option value="">শ্রেণি নির্বাচন</option></select>
 <select id="aDept"><option>নাজেরা বিভাগ</option><option>কিতাব বিভাগ</option><option>হিফজ বিভাগ</option></select>
+<select id="aExamType">
+<option value="">পরীক্ষার ধরণ নির্বাচন</option>
+<option value="অর্ধ বার্ষিক">অর্ধ বার্ষিক পরীক্ষা</option>
+<option value="বার্ষিক">বার্ষিক পরীক্ষা</option>
+</select>
 <input id="aYear" placeholder="পরীক্ষার বছর" value="2026">
 <input id="aBangla" type="number" placeholder="বাংলা নম্বর">
 <input id="aEnglish" type="number" placeholder="ইংরেজি নম্বর">
 <input id="aMath" type="number" placeholder="গণিত নম্বর">
 <input id="aArabic" type="number" placeholder="আরবি নম্বর">
 <button onclick="addStudent()">➕ রেজাল্ট যোগ করুন</button>
+</div>
+
+<div class="admin-list">
+<h4>🗑️ বিদ্যমান রেজাল্ট (ফিল্টার করে খুঁজুন ও প্রয়োজনে মুছে ফেলুন)</h4>
+<div class="admin-list-filters">
+<select id="fClass"><option value="">সকল শ্রেণি</option></select>
+<select id="fExam">
+<option value="">সকল পরীক্ষা</option>
+<option value="অর্ধ বার্ষিক">অর্ধ বার্ষিক</option>
+<option value="বার্ষিক">বার্ষিক</option>
+</select>
+<select id="fYear"><option value="">সকল সাল</option></select>
+<button type="button" onclick="renderAdminList()">🔍 ফিল্টার করুন</button>
+</div>
+<div class="table-wrap" style="margin-top:14px;">
+<table>
+<thead><tr><th>নাম</th><th>রোল</th><th>শ্রেণি</th><th>পরীক্ষা</th><th>সাল</th><th>মোট</th><th>মুছুন</th></tr></thead>
+<tbody id="adminListBody"></tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -416,19 +408,15 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <!-- CERTIFICATE TEMPLATE (only visible when printing a single result) -->
 <div id="certificateArea"></div>
 
-<!-- CLASS LIST PRINT TEMPLATE (only visible when printing a whole class) -->
-<div id="classPrintArea"></div>
-
 <script>
 const classes = ["নার্সারি","১ম শ্রেণী","২য় শ্রেণী","৩য় শ্রেণী","৪র্থ শ্রেণী","৫ম শ্রেণী","৬ষ্ঠ শ্রেণী","৭ম শ্রেণী","৮ম শ্রেণী","৯ম শ্রেণী","হিফজ"];
 
 const defaultStudents = [
-  { id:1, name:"উদাহরণ শিক্ষার্থী", roll:"1001", className:"৫ম শ্রেণী", dept:"কিতাব বিভাগ", year:"2026",
+  { id:1, name:"উদাহরণ শিক্ষার্থী", father:"উদাহরণ পিতা", mother:"উদাহরণ মাতা", roll:"1001", className:"৫ম শ্রেণী", dept:"কিতাব বিভাগ", examType:"বার্ষিক", year:"2026",
     subjects:[["বাংলা",85],["ইংরেজি",82],["গণিত",90],["আরবি",88]] }
 ];
 
 let students = defaultStudents;
-let currentOpenClass = null;
 let captchaA = 0, captchaB = 0;
 
 async function loadStudents(){
@@ -476,6 +464,12 @@ function grade(mark){
   return "F";
 }
 
+function gradePoint(mark){
+  const g = grade(mark);
+  const map = { "A+":"5", "A":"4", "A-":"3.5", "B":"3", "C":"2", "D":"1", "F":"0" };
+  return map[g];
+}
+
 function status(student){
   return student.subjects.some(item => Number(item[1]) < 33) ? "অনুত্তীর্ণ" : "উত্তীর্ণ";
 }
@@ -500,115 +494,44 @@ async function init(){
   classes.forEach(c=>{
     let o2 = document.createElement("option"); o2.value=c; o2.textContent=c;
     document.getElementById("aClass").appendChild(o2);
+
+    let o3 = document.createElement("option"); o3.value=c; o3.textContent=c;
+    document.getElementById("fClass").appendChild(o3);
   });
 
   newCaptcha();
-
-  document.getElementById("classGrid").innerHTML = `<div class="class-empty">লোড হচ্ছে...</div>`;
   await loadStudents();
-  renderClassGrid();
+  refreshYearOptions();
 }
 
-/* ========== CLASS GRID ========== */
-function renderClassGrid(){
-  const grid = document.getElementById("classGrid");
-  let usedClasses = classes.filter(c => students.some(s => s.className === c));
+/* ========== YEAR OPTIONS (built from existing data, so any year/exam
+   the admin adds automatically becomes searchable) ========== */
+function refreshYearOptions(){
+  let years = Array.from(new Set(students.map(s => String(s.year)).filter(Boolean)));
+  years.sort((a,b) => Number(b) - Number(a));
+  if(!years.length){ years = [String(new Date().getFullYear())]; }
 
-  if(!usedClasses.length){
-    grid.innerHTML = `<div class="class-empty">এখনো কোনো শ্রেণির রেজাল্ট যোগ করা হয়নি।</div>`;
-    return;
-  }
+  const searchYear = document.getElementById("searchYear");
+  const keepSearchVal = searchYear.value;
+  searchYear.innerHTML = `<option value="">সাল নির্বাচন</option>` + years.map(y=>`<option value="${y}">${y}</option>`).join("");
+  if(years.includes(keepSearchVal)) searchYear.value = keepSearchVal;
 
-  grid.innerHTML = usedClasses.map(c=>{
-    let count = students.filter(s => s.className === c).length;
-    let active = (c === currentOpenClass) ? "active" : "";
-    return `<div class="class-card ${active}" onclick="showClassResults('${c}')">
-      <div class="cname">${c}</div>
-      <div class="ccount">${count} জন শিক্ষার্থী</div>
-    </div>`;
-  }).join("");
+  const fYear = document.getElementById("fYear");
+  const keepFVal = fYear.value;
+  fYear.innerHTML = `<option value="">সকল সাল</option>` + years.map(y=>`<option value="${y}">${y}</option>`).join("");
+  if(years.includes(keepFVal)) fYear.value = keepFVal;
 }
 
-function showClassResults(className){
-  currentOpenClass = className;
-  let list = students.filter(s => s.className === className);
-  document.getElementById("classResultTitle").textContent = `${className} — সকল ছাত্রীর রেজাল্ট`;
-  const body = document.getElementById("classResultBody");
-
-  if(!list.length){
-    body.innerHTML = `<tr><td colspan="8">এই শ্রেণিতে কোনো রেজাল্ট পাওয়া যায়নি</td></tr>`;
-  }else{
-    body.innerHTML = list.map((student,index)=>`
-      <tr>
-        <td>${index+1}</td>
-        <td>${student.name}</td>
-        <td>${student.roll}</td>
-        <td>${student.dept}</td>
-        <td>${total(student)}</td>
-        <td>${gpa(student)}</td>
-        <td>${status(student)}</td>
-        <td><button onclick="showResult(${student.id})">দেখুন</button></td>
-      </tr>`).join("");
-  }
-
-  document.getElementById("classResultView").classList.add("show");
-  renderClassGrid();
-  document.getElementById("classResultView").scrollIntoView({ behavior:"smooth" });
-}
-
-/* ========== SEARCH (with captcha check) ========== */
-function searchResults(){
-  let roll = document.getElementById("searchRoll").value.trim().toLowerCase();
-  let className = document.getElementById("searchClass").value;
-
-  if(!className || !roll){
-    document.getElementById("searchOutput").innerHTML = `<div class="result-card">অনুগ্রহ করে শ্রেণী নির্বাচন করুন এবং রোল নম্বর লিখুন।</div>`;
-    document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
-    return;
-  }
-
-  if(!checkCaptcha()){
-    document.getElementById("searchOutput").innerHTML = `<div class="result-card">❌ যোগফল সঠিক হয়নি। আবার চেষ্টা করুন।</div>`;
-    newCaptcha();
-    document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
-    return;
-  }
-
-  let found = students.filter(student =>
-    String(student.roll).toLowerCase() === roll &&
-    student.className === className
-  );
-
-  newCaptcha();
-
-  if(!found.length){
-    document.getElementById("searchOutput").innerHTML = `<div class="result-card">কোনো রেজাল্ট পাওয়া যায়নি।</div>`;
-    return;
-  }
-
-  if(found.length===1){
-    showResult(found[0].id);
-  }else{
-    document.getElementById("searchOutput").innerHTML = "";
-    showClassResults(className);
-  }
-
-  document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
-}
-
-/* ========== SINGLE RESULT VIEW ========== */
-function showResult(id){
-  const student = students.find(item => item.id === id);
-  if(!student) return;
-
-  document.getElementById("searchOutput").innerHTML = `
+/* ========== RESULT CARD (shared markup builder) ========== */
+function buildResultCardHTML(student){
+  return `
     <div class="result-card">
       <div class="result-head">
         <div>
           <div class="student-name">${student.name}</div>
-          <div class="meta">রোল: ${student.roll} • ${student.className} • ${student.dept}</div>
+          <div class="meta">রোল: ${student.roll} • ${student.className} • ${student.dept} • ${student.examType || "-"} পরীক্ষা, ${student.year}</div>
         </div>
-        <button class="no-print" onclick="printCertificate(${student.id})">🖨️ প্রিন্ট (সনদ)</button>
+        <button class="no-print" onclick="printCertificate(${student.id})">🖨️ প্রিন্ট (মার্কশিট)</button>
       </div>
       <p style="margin-top:15px"><b>পরীক্ষার বছর:</b> ${student.year}</p>
       <div class="result-table-wrap">
@@ -627,60 +550,57 @@ function showResult(id){
         <span>ফলাফল: ${status(student)}</span>
       </div>
     </div>`;
+}
+
+/* ========== SEARCH (with captcha check) ========== */
+function searchResults(){
+  let roll = document.getElementById("searchRoll").value.trim().toLowerCase();
+  let className = document.getElementById("searchClass").value;
+  let examType = document.getElementById("searchExamType").value;
+  let year = document.getElementById("searchYear").value;
+
+  if(!className || !roll || !examType || !year){
+    document.getElementById("searchOutput").innerHTML = `<div class="result-card">অনুগ্রহ করে শ্রেণী, পরীক্ষার ধরণ ও সাল নির্বাচন করুন এবং রোল নম্বর লিখুন।</div>`;
+    document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
+    return;
+  }
+
+  if(!checkCaptcha()){
+    document.getElementById("searchOutput").innerHTML = `<div class="result-card">❌ যোগফল সঠিক হয়নি। আবার চেষ্টা করুন।</div>`;
+    newCaptcha();
+    document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
+    return;
+  }
+
+  let found = students.filter(student =>
+    String(student.roll).toLowerCase() === roll &&
+    student.className === className &&
+    student.examType === examType &&
+    String(student.year) === year
+  );
+
+  newCaptcha();
+
+  if(!found.length){
+    document.getElementById("searchOutput").innerHTML = `<div class="result-card">কোনো রেজাল্ট পাওয়া যায়নি।</div>`;
+  }else{
+    document.getElementById("searchOutput").innerHTML = found.map(buildResultCardHTML).join("");
+  }
 
   document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
 }
 
 /* ========== PRINT HELPERS ========== */
-/* Marks which single container should be visible for this print job, then
-   removes the mark again once the print dialog closes (or on the next tick
-   for browsers that never fire afterprint), so a later normal page view or
-   a different print job is never left showing the wrong container. */
 function startPrint(mode){
   document.body.classList.add(mode);
   window.print();
 }
 window.addEventListener("afterprint", function(){
-  document.body.classList.remove("printing-cert", "printing-class");
+  document.body.classList.remove("printing-cert");
 });
 
-/* ========== CLASS LIST PRINT ========== */
-function printClassList(){
-  if(!currentOpenClass) return;
-  let list = students.filter(s => s.className === currentOpenClass);
+/* ========== MARKSHEET / CERTIFICATE (government-marksheet-style layout) ========== */
 
-  const rows = list.map((student, index) => `
-    <tr>
-      <td>${index + 1}</td>
-      <td style="text-align:left;">${student.name}</td>
-      <td>${student.roll}</td>
-      <td>${student.dept}</td>
-      <td>${total(student)}</td>
-      <td>${gpa(student)}</td>
-      <td>${status(student)}</td>
-    </tr>`).join("");
-
-  document.getElementById("classPrintArea").innerHTML = `
-    <div class="class-print-page">
-      <div class="class-print-head">
-        <div class="arabic">مدرسة مركز العلوم السلفية للبنات</div>
-        <h2>মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</h2>
-        <p>শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা</p>
-        <h3>${currentOpenClass} — সকল ছাত্রীর রেজাল্ট</h3>
-      </div>
-      <table class="class-print-table">
-        <thead><tr><th>ক্রমিক</th><th style="text-align:left;">নাম</th><th>রোল</th><th>বিভাগ</th><th>মোট</th><th>GPA</th><th>ফলাফল</th></tr></thead>
-        <tbody>${rows || `<tr><td colspan="7">এই শ্রেণিতে কোনো রেজাল্ট পাওয়া যায়নি</td></tr>`}</tbody>
-      </table>
-    </div>`;
-
-  startPrint("printing-class");
-}
-
-/* ========== CERTIFICATE (unique ijazah-style marksheet) ========== */
-
-/* A small repeating arabesque corner flourish, drawn once and reused
-   (rotated/mirrored via CSS transforms) at all four corners. */
 function certCornerSVG(){
   return `<svg viewBox="0 0 46 46" fill="none">
     <path d="M2 2 Q2 26 26 26 Q26 44 44 44" stroke="#a9832c" stroke-width="1.1"/>
@@ -690,7 +610,6 @@ function certCornerSVG(){
   </svg>`;
 }
 
-/* Eight-point star seal used as the institutional emblem. */
 function certSealSVG(){
   return `<svg viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="47" fill="none" stroke="#a9832c" stroke-width="1.4"/>
@@ -707,11 +626,12 @@ function printCertificate(id){
   const student = students.find(item => item.id === id);
   if(!student) return;
 
-  const rows = student.subjects.map(s => `
+  const rows = student.subjects.map((s, i) => `
     <tr>
-      <td>${s[0]}</td>
-      <td style="text-align:center;">${s[1]}</td>
+      <td style="text-align:center;">${i+1}</td>
+      <td style="text-align:left;">${s[0]}</td>
       <td style="text-align:center;">${grade(s[1])}</td>
+      <td style="text-align:center;">${gradePoint(s[1])}</td>
     </tr>`).join("");
 
   const passed = status(student) === "উত্তীর্ণ";
@@ -726,31 +646,48 @@ function printCertificate(id){
           <div class="cert-corner tr">${certCornerSVG()}</div>
           <div class="cert-corner bl">${certCornerSVG()}</div>
           <div class="cert-corner br">${certCornerSVG()}</div>
-          <div class="cert-serial-l">সনদ নং: ${serial}</div>
-          <div class="cert-serial">তারিখ: ${today}</div>
 
-          <div class="cert-arabic">مدرسة مركز العلوم السلفية للبنات</div>
-          <div class="cert-name-bn">মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</div>
-          <div class="cert-addr">শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা</div>
-
-          <div class="cert-ribbon">
-            <span class="line"></span><span class="word">ফলাফল সনদপত্র</span><span class="line"></span>
+          <div class="cert-topline">
+            <div>
+              সনদ নং: ${serial}<br>
+              তারিখ: ${today}
+            </div>
+            <table class="cert-scale">
+              <thead><tr><th>গ্রেড</th><th>নম্বর সীমা</th><th>পয়েন্ট</th></tr></thead>
+              <tbody>
+                <tr><td>A+</td><td>80-100</td><td>5</td></tr>
+                <tr><td>A</td><td>70-79</td><td>4</td></tr>
+                <tr><td>A-</td><td>60-69</td><td>3.5</td></tr>
+                <tr><td>B</td><td>50-59</td><td>3</td></tr>
+                <tr><td>C</td><td>40-49</td><td>2</td></tr>
+                <tr><td>D</td><td>33-39</td><td>1</td></tr>
+                <tr><td>F</td><td>00-32</td><td>0</td></tr>
+              </tbody>
+            </table>
           </div>
 
-          <div class="cert-body">
-            <div class="cert-seal">${certSealSVG()}</div>
-            <div class="cert-info">
-              <div class="cert-info-row"><b>শিক্ষার্থীর নাম</b><span class="val">${student.name}</span></div>
-              <div class="cert-info-row"><b>রোল নম্বর</b><span class="val">${student.roll}</span></div>
-              <div class="cert-info-row"><b>শ্রেণি</b><span class="val">${student.className}</span></div>
-              <div class="cert-info-row"><b>বিভাগ</b><span class="val">${student.dept}</span></div>
-              <div class="cert-info-row"><b>পরীক্ষার বছর</b><span class="val">${student.year}</span></div>
-            </div>
+          <div class="cert-title-arabic">مدرسة مركز العلوم السلفية للبنات</div>
+          <div class="cert-title-bn">মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</div>
+          <div class="cert-addr">শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা</div>
+          <div class="cert-exam">${student.examType || ""} পরীক্ষা — ${student.year}</div>
+
+          <div class="cert-ribbon">
+            <span class="line"></span><span class="word">একাডেমিক মার্কশিট</span><span class="line"></span>
+          </div>
+
+          <div class="cert-info-grid">
+            <div class="cert-info-row"><b>শিক্ষার্থীর নাম</b><span class="val">${student.name}</span></div>
+            <div class="cert-info-row"><b>রোল নম্বর</b><span class="val">${student.roll}</span></div>
+            <div class="cert-info-row"><b>পিতার নাম</b><span class="val">${student.father || "-"}</span></div>
+            <div class="cert-info-row"><b>মাতার নাম</b><span class="val">${student.mother || "-"}</span></div>
+            <div class="cert-info-row"><b>শ্রেণি</b><span class="val">${student.className}</span></div>
+            <div class="cert-info-row"><b>বিভাগ</b><span class="val">${student.dept}</span></div>
+            <div class="cert-info-row full"><b>প্রতিষ্ঠানের নাম</b><span class="val">মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা, শরীফবাগ, ধামরাই, ঢাকা</span></div>
           </div>
 
           <div class="cert-table-wrap">
             <table class="cert-table">
-              <thead><tr><th style="text-align:left;">বিষয়</th><th>নম্বর</th><th>গ্রেড</th></tr></thead>
+              <thead><tr><th>ক্রমিক</th><th style="text-align:left;">বিষয়ের নাম</th><th>লেটার গ্রেড</th><th>গ্রেড পয়েন্ট</th></tr></thead>
               <tbody>${rows}</tbody>
             </table>
           </div>
@@ -758,7 +695,7 @@ function printCertificate(id){
           <div class="cert-summary">
             <span class="cert-pill">মোট নম্বর: ${total(student)}</span>
             <span class="cert-pill">GPA: ${gpa(student)}</span>
-            <span class="cert-pill ${passed ? 'pass' : ''}">ফলাফল: ${status(student)}</span>
+            <span class="cert-pill ${passed ? 'pass' : 'fail'}">ফলাফল: ${status(student)}</span>
           </div>
 
           <div class="cert-foot">
@@ -787,6 +724,7 @@ function toggleAdmin(){
 
   if(adminUnlocked){
     panel.classList.add("show");
+    renderAdminList();
     return;
   }
 
@@ -807,27 +745,91 @@ function confirmAdminLogin(){
     adminUnlocked = true;
     closeAdminModal();
     document.getElementById("adminPanel").classList.add("show");
+    renderAdminList();
   }else{
     document.getElementById("adminModalError").textContent = "পাসওয়ার্ড ভুল হয়েছে, আবার চেষ্টা করুন।";
   }
 }
 
+/* ========== ADMIN RESULT LIST (filter + delete) ========== */
+function renderAdminList(){
+  const fc = document.getElementById("fClass").value;
+  const fy = document.getElementById("fYear").value;
+  const fe = document.getElementById("fExam").value;
+
+  let list = students.filter(s =>
+    (!fc || s.className === fc) &&
+    (!fy || String(s.year) === fy) &&
+    (!fe || s.examType === fe)
+  );
+
+  list.sort((a,b) =>
+    String(b.year).localeCompare(String(a.year)) ||
+    a.className.localeCompare(b.className) ||
+    String(a.roll).localeCompare(String(b.roll))
+  );
+
+  const body = document.getElementById("adminListBody");
+  if(!list.length){
+    body.innerHTML = `<tr><td colspan="7">কোনো রেজাল্ট পাওয়া যায়নি</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = list.map(s => `
+    <tr>
+      <td>${s.name}</td>
+      <td>${s.roll}</td>
+      <td>${s.className}</td>
+      <td>${s.examType || "-"}</td>
+      <td>${s.year}</td>
+      <td>${total(s)}</td>
+      <td><button type="button" class="btn-del" onclick="deleteStudent(${s.id})">🗑️ মুছুন</button></td>
+    </tr>`).join("");
+}
+
+async function deleteStudent(id){
+  const student = students.find(s => s.id === id);
+  if(!student) return;
+
+  const ok = confirm(`আপনি কি নিশ্চিত "${student.name}" (রোল: ${student.roll}, ${student.className}, ${student.examType || "-"} ${student.year}) এর রেজাল্ট মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।`);
+  if(!ok) return;
+
+  students = students.filter(s => s.id !== id);
+  await save();
+  refreshYearOptions();
+  renderAdminList();
+  alert("রেজাল্ট সফলভাবে মুছে ফেলা হয়েছে।");
+}
+
 /* ========== SAVE / ADD STUDENT ========== */
 async function save(){
   await saveStudents();
-  renderClassGrid();
-  if(currentOpenClass){ showClassResults(currentOpenClass); }
 }
 
 async function addStudent(){
   let name = document.getElementById("aName").value.trim();
+  let father = document.getElementById("aFather").value.trim();
+  let mother = document.getElementById("aMother").value.trim();
   let roll = document.getElementById("aRoll").value.trim();
   let className = document.getElementById("aClass").value;
   let dept = document.getElementById("aDept").value;
+  let examType = document.getElementById("aExamType").value;
+  let year = document.getElementById("aYear").value.trim() || "2026";
 
-  if(!name || !roll || !className){
-    alert("নাম, রোল এবং শ্রেণি দিন।");
+  if(!name || !roll || !className || !examType){
+    alert("নাম, রোল, শ্রেণি এবং পরীক্ষার ধরণ (অর্ধ বার্ষিক/বার্ষিক) দিন।");
     return;
+  }
+
+  let duplicate = students.some(s =>
+    String(s.roll).toLowerCase() === roll.toLowerCase() &&
+    s.className === className &&
+    s.examType === examType &&
+    String(s.year) === year
+  );
+  if(duplicate){
+    const proceed = confirm("এই শ্রেণি, পরীক্ষা ও সালের জন্য এই রোলে ইতিমধ্যে একটি রেজাল্ট আছে। আরেকটি নতুন এন্ট্রি হিসেবে যোগ করতে চান?");
+    if(!proceed) return;
   }
 
   let subjects = [
@@ -838,15 +840,18 @@ async function addStudent(){
   ];
 
   students.push({
-    id: Date.now(), name, roll, className, dept,
-    year: document.getElementById("aYear").value || "2026",
+    id: Date.now(), name, father, mother, roll, className, dept, examType, year,
     subjects
   });
 
   await save();
-  alert("রেজাল্ট সফলভাবে যোগ হয়েছে। '"+className+"' শ্রেণির কার্ডে ক্লিক করে দেখুন।");
+  refreshYearOptions();
+  renderAdminList();
+  alert("রেজাল্ট সফলভাবে যোগ হয়েছে। রোল, শ্রেণি, পরীক্ষার ধরণ ও সাল দিয়ে সার্চ করে দেখুন।");
 
   document.getElementById("aName").value = "";
+  document.getElementById("aFather").value = "";
+  document.getElementById("aMother").value = "";
   document.getElementById("aRoll").value = "";
   document.getElementById("aBangla").value = "";
   document.getElementById("aEnglish").value = "";
@@ -887,3 +892,4 @@ window.init();
 
 </body>
 </html>
+
