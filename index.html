@@ -5,124 +5,289 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@500;600;700;800&family=Amiri:wght@400;700&display=swap');
+
+:root{
+  --emerald-950:#052a20;
+  --emerald-900:#07382a;
+  --emerald-800:#0b4a37;
+  --emerald-700:#0f5c43;
+  --gold-500:#b6903f;
+  --gold-600:#96742f;
+  --gold-100:#f1e4c5;
+  --ivory:#faf7ef;
+  --ivory-deep:#f3ede0;
+  --ink:#1c2621;
+  --ink-soft:#4c5951;
+  --line:#e2dcc9;
+  --danger:#9a3324;
+}
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
   font-family:"Noto Sans Bengali",sans-serif;
-  background:#f3f8f5;
-  color:#17332b;
+  background:var(--ivory);
+  color:var(--ink);
   -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
 }
 input, select, textarea{ -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text; user-select:text; }
+h1,h2,h3{ font-family:"Noto Serif Bengali",serif; }
+
+/* subtle repeating geometric motif used as a background texture */
+.motif-bg{
+  background-image: radial-gradient(circle at 1px 1px, rgba(182,144,63,.35) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+}
 
 /* TOP BAR */
-.topbar{ background:#043c2e; color:white; text-align:center; padding:9px; font-size:14px; letter-spacing:.3px; }
+.topbar{
+  background:var(--emerald-950); color:var(--gold-100); text-align:center;
+  padding:8px 12px; font-size:12.5px; letter-spacing:.4px;
+  border-bottom:1px solid rgba(182,144,63,.35);
+}
 
 /* HEADER */
-header{ background:linear-gradient(135deg,#064e3b,#087f5b); color:white; position:sticky; top:0; z-index:1000; box-shadow:0 3px 15px rgba(0,0,0,.2); }
-.nav{ max-width:1200px; margin:auto; display:flex; align-items:center; padding:10px 18px; }
-.brand{ display:flex; align-items:center; gap:12px; flex:1; text-decoration:none; color:white; }
-.brand img{ width:65px; height:65px; border-radius:50%; object-fit:cover; background:white; border:2px solid white; }
-.brand-bn{ font-size:18px; font-weight:800; }
-.brand-en{ font-size:10px; margin-top:3px; opacity:.9; letter-spacing:.5px; }
-nav{ display:flex; gap:5px; }
-nav a{ color:white; text-decoration:none; padding:9px 12px; border-radius:8px; font-size:14px; transition:background .2s; }
-nav a:hover{ background:rgba(255,255,255,.18); }
-.menu{ display:none; background:none; border:0; color:white; font-size:27px; cursor:pointer; line-height:1; }
+header{
+  background:var(--emerald-900); color:white; position:sticky; top:0; z-index:1000;
+  border-bottom:2px solid var(--gold-500);
+}
+.nav{ max-width:1180px; margin:auto; display:flex; align-items:center; padding:12px 20px; }
+.brand{ display:flex; align-items:center; gap:14px; flex:1; text-decoration:none; color:white; }
+.brand img{ width:58px; height:58px; border-radius:50%; object-fit:cover; background:white; border:2px solid var(--gold-500); }
+.brand-bn{ font-size:18px; font-weight:700; font-family:"Noto Serif Bengali",serif; letter-spacing:.2px; }
+.brand-en{ font-size:9.5px; margin-top:4px; opacity:.75; letter-spacing:1px; }
+nav{ display:flex; gap:2px; }
+nav a{ color:var(--gold-100); text-decoration:none; padding:10px 14px; font-size:14px; position:relative; transition:color .2s; }
+nav a::after{ content:""; position:absolute; left:14px; right:14px; bottom:6px; height:1px; background:var(--gold-500); transform:scaleX(0); transition:transform .2s; transform-origin:left; }
+nav a:hover{ color:white; }
+nav a:hover::after{ transform:scaleX(1); }
+.menu{ display:none; background:none; border:0; color:white; font-size:26px; cursor:pointer; line-height:1; }
 
 /* HERO */
-.hero{ background:linear-gradient(135deg,#e5f6ed,#fff9dc); padding:70px 20px; text-align:center; }
-.arabic{ font-family:Amiri,serif; font-size:38px; color:#07543f; direction:rtl; }
-.hero h1{ color:#063e30; font-size:35px; margin:8px 0; }
-.hero p{ color:#596c65; margin:5px; }
-.badges{ display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:25px; }
-.badge{ background:white; border:1px solid #d5e7df; border-radius:30px; padding:9px 17px; font-weight:600; box-shadow:0 3px 10px rgba(0,0,0,.04); }
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    linear-gradient(180deg, var(--emerald-950) 0%, var(--emerald-900) 55%, var(--emerald-800) 100%);
+  padding:86px 20px 70px; text-align:center; color:var(--ivory);
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(241,228,197,.16) 1px, transparent 1.6px);
+  background-size: 30px 30px;
+  opacity:.5;
+}
+.hero-frame{ position:relative; z-index:1; }
+.hero-rule{ display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:18px; }
+.hero-rule .ln{ width:46px; height:1px; background:var(--gold-500); }
+.hero-rule .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold-500); transform:rotate(45deg); }
+.arabic{ font-family:Amiri,serif; font-size:32px; color:var(--gold-100); direction:rtl; }
+.hero h1{ color:#fff; font-size:34px; margin:14px 0 6px; font-weight:700; letter-spacing:.2px; }
+.hero p{ color:var(--gold-100); margin:4px; font-size:14.5px; opacity:.85; }
+.badges{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:30px; }
+.badge{
+  background:rgba(250,247,239,.06); border:1px solid rgba(182,144,63,.5); color:var(--gold-100);
+  border-radius:2px; padding:10px 20px; font-weight:600; font-size:13.5px; letter-spacing:.3px;
+  backdrop-filter:blur(2px);
+}
 
 /* CONTAINER */
-.container{ max-width:1200px; margin:auto; padding:50px 18px; }
-.section-title{ text-align:center; margin-bottom:28px; }
-.section-title h2{ color:#07543f; font-size:28px; }
-.section-title p{ color:#697871; }
+.container{ max-width:1180px; margin:auto; padding:64px 20px; }
+.section-title{ text-align:center; margin-bottom:36px; }
+.section-title .eyebrow-line{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+.section-title .eyebrow-line .ln{ width:30px; height:1px; background:var(--gold-500); }
+.section-title h2{ color:var(--emerald-900); font-size:27px; font-weight:700; }
+.section-title p{ color:var(--ink-soft); margin-top:6px; font-size:14.5px; }
 
 /* CARDS */
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.card{ background:white; border-radius:17px; padding:25px; box-shadow:0 5px 20px rgba(0,0,0,.07); border:1px solid #e1eee8; transition:transform .2s, box-shadow .2s; }
-.card:hover{ transform:translateY(-4px); box-shadow:0 10px 28px rgba(7,84,63,.12); }
-.card h3{ color:#07543f; margin-bottom:10px; }
-.card p{ line-height:1.9; color:#63736d; }
+.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line); }
+.card{
+  background:white; padding:34px 28px; border-right:1px solid var(--line);
+  position:relative;
+}
+.card:last-child{ border-right:none; }
+.card .glyph{ font-size:22px; margin-bottom:14px; display:block; }
+.card h3{ color:var(--emerald-900); margin-bottom:12px; font-size:17px; font-weight:600; }
+.card p{ line-height:1.9; color:var(--ink-soft); font-size:14.5px; }
+
+/* DEPARTMENTS - alternate treatment so it doesn't feel like the same card kit repeated */
+.dept-list{ border-top:1px solid var(--line); }
+.dept-row{
+  display:grid; grid-template-columns:70px 1fr; gap:22px; align-items:start;
+  padding:26px 6px; border-bottom:1px solid var(--line);
+}
+.dept-row .dept-glyph{ font-size:26px; text-align:center; }
+.dept-row h3{ color:var(--emerald-900); font-size:17px; margin-bottom:6px; font-weight:600; }
+.dept-row p{ color:var(--ink-soft); font-size:14.5px; line-height:1.8; }
 
 /* SEARCH */
-.search-box{ background:white; padding:25px; border-radius:18px; box-shadow:0 5px 25px rgba(0,0,0,.08); }
-.search-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.captcha-row{ display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap; }
-.captcha-num{ background:#eff8f4; border:1px solid #cbded5; border-radius:9px; padding:10px 16px; font-weight:800; color:#07543f; font-size:16px; }
+.search-box{
+  background:white; padding:32px; border:1px solid var(--line); position:relative;
+}
+.search-box::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--emerald-800), var(--gold-500));
+}
+.search-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.captcha-row{ display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap; }
+.captcha-num{
+  background:var(--ivory-deep); border:1px solid var(--line); padding:11px 18px;
+  font-weight:700; color:var(--emerald-900); font-size:15px; letter-spacing:.3px;
+}
 .captcha-row input{ max-width:120px; }
-.captcha-refresh{ background:none; border:1px solid #cbded5; color:#07543f; padding:9px 12px; }
-.captcha-refresh:hover{ background:#eff8f4; }
+.captcha-refresh{ background:white; border:1px solid var(--line); color:var(--emerald-800); padding:10px 14px; font-weight:600; }
+.captcha-refresh:hover{ background:var(--ivory-deep); }
 
-input, select{ width:100%; padding:12px; border:1px solid #cbded5; border-radius:9px; font-family:inherit; outline:none; font-size:14px; transition:border-color .2s; }
-input:focus, select:focus{ border-color:#087f5b; }
-button{ border:0; border-radius:9px; padding:12px 18px; background:#087f5b; color:white; font-family:inherit; font-weight:700; cursor:pointer; transition:background .2s, transform .15s; }
-button:hover{ background:#064e3b; }
-button:active{ transform:scale(.97); }
+input, select{
+  width:100%; padding:12px 13px; border:1px solid var(--line); border-radius:2px;
+  font-family:inherit; outline:none; font-size:14px; background:white; color:var(--ink);
+  transition:border-color .2s;
+}
+input:focus, select:focus{ border-color:var(--gold-500); }
+button{
+  border:0; border-radius:2px; padding:13px 20px; background:var(--emerald-800); color:white;
+  font-family:inherit; font-weight:600; letter-spacing:.2px; cursor:pointer; font-size:14px;
+  transition:background .2s;
+}
+button:hover{ background:var(--emerald-900); }
+button:active{ transform:scale(.99); }
+button:disabled{ opacity:.75; cursor:not-allowed; }
+.btn-spinner{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+}
+.spin-ring{
+  width:15px; height:15px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff;
+  border-radius:50%; display:inline-block; animation:spin-rotate .7s linear infinite;
+}
+@keyframes spin-rotate{ to{ transform:rotate(360deg); } }
 
-/* RESULT CARD (on-screen, responsive so no zoom needed) */
-.result-card{ margin-top:25px; background:white; border-radius:18px; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,.08); }
-.result-head{ display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #e5eee9; padding-bottom:15px; flex-wrap:wrap; gap:10px; }
-.student-name{ font-size:22px; font-weight:800; color:#07543f; }
-.meta{ color:#65756f; margin-top:5px; font-size:14px; }
-.result-table-wrap{ overflow-x:auto; margin-top:18px; -webkit-overflow-scrolling:touch; }
+/* RESULT CARD */
+.result-card{ margin-top:26px; background:white; border:1px solid var(--line); padding:26px; position:relative; }
+.result-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--gold-500), var(--emerald-800));
+}
+.result-head{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:16px; flex-wrap:wrap; gap:12px; }
+.student-name{ font-size:21px; font-weight:700; color:var(--emerald-900); font-family:"Noto Serif Bengali",serif; }
+.meta{ color:var(--ink-soft); margin-top:6px; font-size:13.5px; }
+.result-table-wrap{ overflow-x:auto; margin-top:20px; -webkit-overflow-scrolling:touch; }
 .result-table{ width:100%; min-width:0; border-collapse:collapse; font-size:14px; }
-.result-table th{ background:#e9f4ef; color:#07543f; }
-.result-table th, .result-table td{ border:1px solid #dbe9e3; padding:8px 6px; white-space:nowrap; }
-.total{ display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:16px; }
-.total span{ background:#eff8f4; padding:8px 13px; border-radius:9px; font-weight:700; font-size:13px; }
+.result-table th{ background:var(--emerald-900); color:var(--gold-100); font-weight:600; text-align:left; }
+.result-table th, .result-table td{ border:1px solid var(--line); padding:9px 10px; white-space:nowrap; }
+.result-table tr:nth-child(even) td{ background:var(--ivory-deep); }
+.total{ display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.total span{ background:var(--ivory-deep); border:1px solid var(--line); padding:9px 15px; font-weight:700; font-size:13px; color:var(--emerald-900); }
 
-/* TABLE (used by admin result list) */
-.table-wrap{ overflow:auto; background:white; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,.07); }
+/* TABLE */
+.table-wrap{ overflow:auto; background:white; border:1px solid var(--line); }
 table{ width:100%; border-collapse:collapse; min-width:650px; }
-th, td{ padding:12px; border-bottom:1px solid #e4eee9; text-align:center; }
-th{ background:#07543f; color:white; }
-tr:hover td{ background:#f5faf7; }
+th, td{ padding:12px; border-bottom:1px solid var(--line); text-align:center; font-size:13.5px; }
+th{ background:var(--emerald-900); color:var(--gold-100); font-weight:600; }
+tr:hover td{ background:var(--ivory-deep); }
 
-/* ADMIN RESULT LIST (delete) */
-.admin-list{ margin-top:24px; }
-.admin-list h4{ color:#07543f; margin-bottom:10px; font-size:16px; }
+/* ADMIN RESULT LIST */
+.admin-list{ margin-top:28px; }
+.admin-list h4{ color:var(--emerald-900); margin-bottom:12px; font-size:15px; font-weight:600; }
 .admin-list-filters{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-button.btn-del{ background:#c0392b; padding:8px 12px; font-size:12px; }
-button.btn-del:hover{ background:#96281b; }
+button.btn-del{ background:var(--danger); padding:8px 12px; font-size:12px; }
+button.btn-del:hover{ background:#7a281c; }
 
 /* CONTACT */
-.contact{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.contact-box{ background:white; padding:25px; border-radius:17px; box-shadow:0 4px 18px rgba(0,0,0,.07); }
-.contact-box h3{ color:#07543f; margin-bottom:12px; }
-.contact-box p{ margin:10px 0; }
+.contact{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); }
+.contact-box{ background:white; padding:32px; border-right:1px solid var(--line); }
+.contact-box:last-child{ border-right:none; }
+.contact-box h3{ color:var(--emerald-900); margin-bottom:14px; font-size:16px; font-weight:600; }
+.contact-box p{ margin:10px 0; color:var(--ink-soft); font-size:14.5px; }
+.contact-box a{ color:var(--emerald-800); text-decoration:none; font-weight:600; }
+.contact-box a:hover{ text-decoration:underline; }
 
 /* FOOTER */
-footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; line-height:2; }
+footer{
+  background:var(--emerald-950); color:var(--gold-100); text-align:center; padding:38px 15px;
+  line-height:2; font-size:13.5px; border-top:2px solid var(--gold-500);
+}
+footer b{ font-family:"Noto Serif Bengali",serif; font-size:15px; color:white; }
+footer a{ color:var(--gold-100); }
 
-/* ADMIN */
-.admin{ background:#fff8e5; }
-.admin-panel{ display:none; margin-top:20px; }
-.admin-panel.show{ display:block; }
-.admin-form{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; background:white; padding:20px; border-radius:15px; }
-.notice{ padding:12px; background:#edf8f2; border-left:4px solid #087f5b; margin:15px 0; border-radius:6px; }
+/* ADMIN ENTRY BUTTON (centered, on main page) */
+.admin-entry{ padding:20px 20px 64px; text-align:center; }
+.admin-entry-wrap{ display:flex; justify-content:center; }
+#adminEntryBtn{
+  background:transparent; color:var(--emerald-800); border:1px solid var(--gold-500);
+  padding:13px 34px; font-weight:600; letter-spacing:.4px; font-size:14px;
+}
+#adminEntryBtn:hover{ background:var(--emerald-900); color:var(--gold-100); border-color:var(--emerald-900); }
+
+.admin-form{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; background:white; padding:24px; border:1px solid var(--line); }
+.notice{
+  padding:14px 16px; background:white; border:1px solid var(--line); border-left:3px solid var(--gold-500);
+  margin:0 0 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.8;
+}
+
+/* ===== DEDICATED ADMIN PAGE (full screen) ===== */
+.admin-page-overlay{
+  display:none; position:fixed; inset:0; z-index:1800; background:var(--ivory);
+  overflow-y:auto;
+}
+.admin-page-overlay.show{ display:block; }
+
+.admin-page-header{
+  background:var(--emerald-950); border-bottom:2px solid var(--gold-500);
+  position:sticky; top:0; z-index:5;
+}
+.admin-page-header-inner{
+  max-width:1180px; margin:auto; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.admin-back-btn{
+  background:transparent; border:1px solid var(--gold-500); color:var(--gold-100);
+  padding:8px 15px; font-size:13.5px; font-weight:600;
+}
+.admin-back-btn:hover{ background:rgba(182,144,63,.18); }
+.admin-logout-btn{ background:var(--danger); padding:8px 15px; font-size:13px; }
+.admin-logout-btn:hover{ background:#7a281c; }
+
+.admin-page-body{ max-width:1180px; margin:auto; padding:32px 20px 70px; }
+
+.admin-stats{
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+  gap:8px 0; border:1px solid var(--line); margin-bottom:36px; background:white; padding:12px 10px;
+}
+.admin-stat{ display:flex; align-items:baseline; gap:6px; padding:0 18px; border-right:1px solid var(--line); }
+.admin-stat:last-child{ border-right:none; }
+.admin-stat .num{ font-size:16px; font-weight:700; color:var(--emerald-900); font-family:"Noto Serif Bengali",serif; }
+.admin-stat .lbl{ font-size:12px; color:var(--ink-soft); }
+
+.admin-block{ margin-bottom:44px; }
+.admin-block-title{
+  display:flex; align-items:center; gap:12px; margin-bottom:18px;
+}
+.admin-block-title .ln{ height:1px; flex:1; background:var(--line); }
+.admin-block-title h3{ font-size:16px; color:var(--emerald-900); font-weight:700; font-family:"Noto Serif Bengali",serif; white-space:nowrap; }
+
+@media(max-width:800px){
+  .admin-stat{ padding:0 12px; }
+}
+@media(max-width:500px){
+  .admin-stat{ border-right:none; padding:2px 10px; }
+}
+
 
 /* ADMIN LOGIN MODAL */
-.modal-overlay{ display:none; position:fixed; inset:0; background:rgba(6,30,23,.55); z-index:2000; align-items:center; justify-content:center; padding:20px; }
+.modal-overlay{ display:none; position:fixed; inset:0; background:rgba(5,42,32,.6); z-index:2000; align-items:center; justify-content:center; padding:20px; }
 .modal-overlay.show{ display:flex; }
-.modal-box{ background:white; border-radius:18px; padding:30px; max-width:360px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,.3); text-align:center; animation:pop .18s ease; }
-@keyframes pop{ from{ transform:scale(.92); opacity:0; } to{ transform:scale(1); opacity:1; } }
-.modal-box h3{ color:#07543f; margin-bottom:8px; font-size:19px; }
-.modal-box p{ color:#697871; font-size:13px; margin-bottom:18px; }
+.modal-box{
+  background:var(--ivory); border-top:3px solid var(--gold-500); padding:32px; max-width:360px; width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,.35); text-align:center; animation:pop .18s ease;
+}
+@keyframes pop{ from{ transform:scale(.94); opacity:0; } to{ transform:scale(1); opacity:1; } }
+.modal-box h3{ color:var(--emerald-900); margin-bottom:8px; font-size:18px; }
+.modal-box p{ color:var(--ink-soft); font-size:13px; margin-bottom:20px; }
 .modal-box input{ text-align:center; letter-spacing:2px; font-size:16px; }
-.modal-box .modal-btns{ display:flex; gap:10px; margin-top:16px; }
+.modal-box .modal-btns{ display:flex; gap:10px; margin-top:18px; }
 .modal-box .modal-btns button{ flex:1; }
-.modal-cancel{ background:#eef3f0; color:#345048; }
-.modal-cancel:hover{ background:#e1e9e4; }
-.modal-error{ color:#c0392b; font-size:13px; margin-top:10px; min-height:16px; }
+.modal-cancel{ background:white; color:var(--emerald-900); border:1px solid var(--line); }
+.modal-cancel:hover{ background:var(--ivory-deep); }
+.modal-error{ color:var(--danger); font-size:13px; margin-top:10px; min-height:16px; }
 
 /* CERTIFICATE (print only) */
 #certificateArea{ display:none; }
@@ -152,7 +317,7 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 .cert-corner.br{ bottom:6px; right:6px; transform:scale(-1,-1); }
 
 .cert-title-arabic{ font-family:Amiri,serif; font-size:20px; color:var(--emerald); direction:rtl; margin-top:10px; }
-.cert-title-bn{ font-size:18px; font-weight:800; color:var(--emerald-dark); margin-top:4px; }
+.cert-title-bn{ font-size:18px; font-weight:800; color:var(--emerald-dark); margin-top:4px; font-family:"Noto Serif Bengali",serif; }
 .cert-addr{ font-size:10.5px; color:#6c7a72; margin-top:2px; letter-spacing:.2px; }
 .cert-exam{ font-size:13px; font-weight:700; color:var(--gold); margin-top:8px; letter-spacing:.5px; }
 
@@ -183,33 +348,36 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 
 /* MOBILE */
 @media(max-width:800px){
-  nav{ display:none; position:absolute; left:0; right:0; top:85px; background:#064e3b; padding:10px; flex-direction:column; }
+  nav{ display:none; position:absolute; left:0; right:0; top:82px; background:var(--emerald-900); padding:10px; flex-direction:column; border-bottom:2px solid var(--gold-500); }
   .nav.open nav{ display:flex; }
   .menu{ display:block; }
   .cards{ grid-template-columns:1fr; }
+  .card{ border-right:none; border-bottom:1px solid var(--line); }
+  .card:last-child{ border-bottom:none; }
+  .dept-row{ grid-template-columns:50px 1fr; }
   .search-grid{ grid-template-columns:1fr 1fr; }
   .contact{ grid-template-columns:1fr; }
+  .contact-box{ border-right:none; border-bottom:1px solid var(--line); }
+  .contact-box:last-child{ border-bottom:none; }
   .admin-form{ grid-template-columns:1fr 1fr; }
   .admin-list-filters{ grid-template-columns:1fr 1fr; }
-  .hero h1{ font-size:27px; }
-  .arabic{ font-size:29px; }
+  .hero h1{ font-size:26px; }
+  .arabic{ font-size:26px; }
   .cert-info-grid{ grid-template-columns:1fr; }
 }
 @media(max-width:500px){
   .search-grid, .admin-form, .admin-list-filters{ grid-template-columns:1fr; }
   .brand-bn{ font-size:14px; }
   .brand-en{ display:none; }
-  .brand img{ width:52px; height:52px; }
+  .brand img{ width:48px; height:48px; }
   .result-table{ font-size:12px; }
   .result-table th, .result-table td{ padding:6px 4px; }
-  .student-name{ font-size:19px; }
+  .student-name{ font-size:18px; }
   .total span{ font-size:12px; padding:7px 10px; }
+  .container{ padding:48px 16px; }
 }
 
-/* PRINT
-   Only #certificateArea prints; display:none removes everything else from
-   the flow entirely, so the printed container's width is governed by the
-   page's own printable area instead of a fixed/absolute box that can spill out. */
+/* PRINT */
 @media print{
   body{ background:#fff; }
   .no-print{ display:none !important; }
@@ -224,6 +392,7 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 
 <body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" ondragstart="return false;">
 
+<div id="mainSite">
 <div class="topbar">বিসমিল্লাহির রাহমানির রাহিম • আদর্শ নারী গঠনে প্রত্যয় অঙ্গীকারাবদ্ধ</div>
 
 <header>
@@ -247,37 +416,51 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 </header>
 
 <section class="hero" id="home">
+<div class="hero-frame">
+<div class="hero-rule"><span class="ln"></span><span class="dot"></span><span class="ln"></span></div>
 <div class="arabic">مدرسة مركز العلوم السلفية للبنات</div>
 <h1>মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা</h1>
 <p>MARKAZUL ULUM SALAFIA MAHILA MADRASHA</p>
 <p>শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা</p>
 <div class="badges">
-<span class="badge">📗 নাজেরা বিভাগ</span>
-<span class="badge">📘 কিতাব বিভাগ</span>
-<span class="badge">📕 হিফজ বিভাগ</span>
+<span class="badge">নাজেরা বিভাগ</span>
+<span class="badge">কিতাব বিভাগ</span>
+<span class="badge">হিফজ বিভাগ</span>
+</div>
 </div>
 </section>
 
 <section class="container" id="about">
-<div class="section-title"><h2>আমাদের সম্পর্কে</h2><p>শিক্ষা, আদর্শ ও নৈতিকতার সমন্বিত পরিবেশ</p></div>
+<div class="section-title">
+<div class="eyebrow-line"><span class="ln"></span></div>
+<h2>আমাদের সম্পর্কে</h2>
+<p>শিক্ষা, আদর্শ ও নৈতিকতার সমন্বিত পরিবেশ</p>
+</div>
 <div class="cards">
-<div class="card"><h3>🎓 শিক্ষার বিভাগ</h3><p>নাজেরা, কিতাব ও হিফজ—তিনটি বিভাগে শিক্ষার্থীদের শিক্ষা কার্যক্রম পরিচালিত হয়।</p></div>
-<div class="card"><h3>🌱 আমাদের লক্ষ্য</h3><p>ইসলামী আদর্শ ও নৈতিক শিক্ষার মাধ্যমে জ্ঞানী, চরিত্রবান ও আদর্শ নারী গড়ে তোলা।</p></div>
-<div class="card"><h3>📍 আমাদের ঠিকানা</h3><p>শরীফবাগ উত্তর-পশ্চিমপাড়া,<br>ধামরাই, ঢাকা।</p></div>
+<div class="card"><span class="glyph">🎓</span><h3>শিক্ষার বিভাগ</h3><p>নাজেরা, কিতাব ও হিফজ—তিনটি বিভাগে শিক্ষার্থীদের শিক্ষা কার্যক্রম পরিচালিত হয়।</p></div>
+<div class="card"><span class="glyph">🌱</span><h3>আমাদের লক্ষ্য</h3><p>ইসলামী আদর্শ ও নৈতিক শিক্ষার মাধ্যমে জ্ঞানী, চরিত্রবান ও আদর্শ নারী গড়ে তোলা।</p></div>
+<div class="card"><span class="glyph">📍</span><h3>আমাদের ঠিকানা</h3><p>শরীফবাগ উত্তর-পশ্চিমপাড়া,<br>ধামরাই, ঢাকা।</p></div>
 </div>
 </section>
 
-<section class="container" id="departments">
-<div class="section-title"><h2>আমাদের বিভাগসমূহ</h2></div>
-<div class="cards">
-<div class="card"><h3>📗 নাজেরা বিভাগ</h3><p><b>শ্রেণি:</b> নার্সারি থেকে ২য় শ্রেণী পর্যন্ত।</p></div>
-<div class="card"><h3>📘 কিতাব বিভাগ</h3><p><b>শ্রেণি:</b> ৩য় শ্রেণী থেকে ৯ম শ্রেণী পর্যন্ত।</p></div>
-<div class="card"><h3>📕 হিফজ বিভাগ</h3><p>কুরআনুল কারীম হিফজের জন্য পৃথক বিভাগ।</p></div>
+<section class="container" id="departments" style="background:var(--ivory-deep);">
+<div class="section-title">
+<div class="eyebrow-line"><span class="ln"></span></div>
+<h2>আমাদের বিভাগসমূহ</h2>
+</div>
+<div class="dept-list">
+<div class="dept-row"><div class="dept-glyph">📗</div><div><h3>নাজেরা বিভাগ</h3><p><b>শ্রেণি:</b> নার্সারি থেকে ২য় শ্রেণী পর্যন্ত।</p></div></div>
+<div class="dept-row"><div class="dept-glyph">📘</div><div><h3>কিতাব বিভাগ</h3><p><b>শ্রেণি:</b> ৩য় শ্রেণী থেকে ৯ম শ্রেণী পর্যন্ত।</p></div></div>
+<div class="dept-row" style="border-bottom:none;"><div class="dept-glyph">📕</div><div><h3>হিফজ বিভাগ</h3><p>কুরআনুল কারীম হিফজের জন্য পৃথক বিভাগ।</p></div></div>
 </div>
 </section>
 
 <section class="container" id="result">
-<div class="section-title"><h2>🔎 রেজাল্ট খুঁজুন</h2><p>রোল নম্বর অথবা শ্রেণি দিয়ে রেজাল্ট খুঁজুন</p></div>
+<div class="section-title">
+<div class="eyebrow-line"><span class="ln"></span></div>
+<h2>রেজাল্ট খুঁজুন</h2>
+<p>রোল নম্বর অথবা শ্রেণি দিয়ে রেজাল্ট খুঁজুন</p>
+</div>
 <div class="search-box">
 <div class="search-grid">
 <select id="searchClass">
@@ -305,35 +488,82 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <div class="captcha-row">
 <span class="captcha-num" id="captchaText">যাচাই: ২ + ৩ = ?</span>
 <input id="captchaAnswer" type="number" placeholder="উত্তর লিখুন">
-<button type="button" class="captcha-refresh" onclick="newCaptcha()">🔄 নতুন সংখ্যা</button>
+<button type="button" class="captcha-refresh" onclick="newCaptcha()">নতুন সংখ্যা</button>
 </div>
-<button style="width:100%;margin-top:14px;" onclick="searchResults()">🔎 সার্চ করুন</button>
+<button style="width:100%;margin-top:16px;" onclick="searchResults()">সার্চ করুন</button>
 <div id="searchOutput"></div>
 </div>
 </section>
 
-<section class="container" id="contact">
-<div class="section-title"><h2>📞 যোগাযোগ</h2></div>
+<section class="container" id="contact" style="background:var(--ivory-deep);">
+<div class="section-title">
+<div class="eyebrow-line"><span class="ln"></span></div>
+<h2>যোগাযোগ</h2>
+</div>
 <div class="contact">
 <div class="contact-box">
-<h3>📍 মাদরাসার ঠিকানা</h3>
+<h3>মাদরাসার ঠিকানা</h3>
 <p>শরীফবাগ উত্তর-পশ্চিমপাড়া,<br>ধামরাই, ঢাকা।</p>
-<a href="https://maps.google.com/?q=Sharifbag,Dhamrai,Dhaka" target="_blank"><button>📍 Google Map</button></a>
+<a href="https://maps.google.com/?q=Sharifbag,Dhamrai,Dhaka" target="_blank"><button>Google Map দেখুন</button></a>
 </div>
 <div class="contact-box">
-<h3>📱 যোগাযোগের নম্বর</h3>
+<h3>যোগাযোগের নম্বর</h3>
 <p>📞 <a href="tel:01624429765">০১৬২৪-৪২৯৭৬৫</a></p>
 <p>📞 <a href="tel:01615996963">০১৬১৫-৯৯৬৯৬৩</a></p>
 </div>
 </div>
 </section>
 
-<section class="container admin">
-<div class="section-title"><h2>⚙️ রেজাল্ট ম্যানেজমেন্ট</h2><p>অ্যাডমিনের মাধ্যমে রেজাল্ট যোগ করুন</p></div>
-<div class="search-box">
-<button onclick="toggleAdmin()">Admin Panel দেখান / লুকান</button>
-<div class="admin-panel" id="adminPanel">
-<div class="notice"><b>নোট:</b> রেজাল্ট এখন থেকে ওয়েবসাইটের নিজস্ব (persistent) স্টোরেজে সংরক্ষিত হবে — অর্থাৎ যেকোনো ব্রাউজার বা ডিভাইস থেকে ভিজিট করলে সবাই একই রেজাল্ট দেখতে পাবে। প্রতিটি রেজাল্ট শ্রেণি, পরীক্ষার ধরণ (অর্ধ বার্ষিক/বার্ষিক) ও সাল অনুযায়ী আলাদাভাবে সংরক্ষিত হবে, তাই একই শিক্ষার্থীর ভিন্ন ভিন্ন পরীক্ষার রেজাল্ট আলাদাভাবে যোগ করা যাবে এবং শিক্ষার্থীরা রোল, শ্রেণি, পরীক্ষার ধরণ ও সাল মিলিয়ে সঠিক রেজাল্টটি সার্চ করে দেখতে পারবে।</div>
+<section class="container admin-entry">
+<div class="admin-entry-wrap">
+<button id="adminEntryBtn" onclick="adminButtonClick()">এডমিন প্যানেল</button>
+</div>
+</section>
+
+<footer>
+<b>مدرسة مركز العلوم السلفية للبنات</b><br>
+মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা<br>
+শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা<br>
+📞 ০১৬২৪-৪২৯৭৬৫ | ০১৬১৫-৯৯৬৯৬৩<br>
+© <span id="year"></span> MARKAZUL ULUM SALAFIA MAHILA MADRASHA
+</footer>
+</div><!-- /mainSite -->
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="adminModal">
+<div class="modal-box">
+<h3>অ্যাডমিন লগইন</h3>
+<p>প্যানেলে প্রবেশ করতে পাসওয়ার্ড দিন</p>
+<input id="adminPassInput" type="password" placeholder="পাসওয়ার্ড" onkeydown="if(event.key==='Enter')confirmAdminLogin()">
+<div class="modal-error" id="adminModalError"></div>
+<div class="modal-btns">
+<button class="modal-cancel" onclick="closeAdminModal()">বাতিল</button>
+<button onclick="confirmAdminLogin()">প্রবেশ করুন</button>
+</div>
+</div>
+</div>
+
+<!-- DEDICATED ADMIN PAGE -->
+<div class="admin-page-overlay" id="adminPageOverlay">
+<div class="admin-page-header">
+<div class="admin-page-header-inner">
+<button class="admin-back-btn" onclick="closeAdminPage()"><span aria-hidden="true" style="margin-inline-end:6px;">←</span>মেইন পেইজ</button>
+<button class="admin-logout-btn" onclick="adminLogout()">লগআউট</button>
+</div>
+</div>
+
+<div class="admin-page-body">
+
+<div class="admin-stats" id="adminStats">
+<div class="admin-stat"><span class="lbl">মোট রেজাল্ট:</span><span class="num" id="statTotal">0</span></div>
+<div class="admin-stat"><span class="lbl">উত্তীর্ণ:</span><span class="num" id="statPass">0</span></div>
+<div class="admin-stat"><span class="lbl">অনুত্তীর্ণ:</span><span class="num" id="statFail">0</span></div>
+<div class="admin-stat"><span class="lbl">শিক্ষাবর্ষ:</span><span class="num" id="statYears">0</span></div>
+</div>
+
+
+<div class="admin-block">
+<div class="admin-block-title"><h3>নতুন রেজাল্ট যোগ করুন</h3><span class="ln"></span></div>
 <div class="admin-form">
 <input id="aName" placeholder="শিক্ষার্থীর নাম">
 <input id="aFather" placeholder="পিতার নাম">
@@ -351,11 +581,12 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <input id="aEnglish" type="number" placeholder="ইংরেজি নম্বর">
 <input id="aMath" type="number" placeholder="গণিত নম্বর">
 <input id="aArabic" type="number" placeholder="আরবি নম্বর">
-<button onclick="addStudent()">➕ রেজাল্ট যোগ করুন</button>
+<button id="addStudentBtn" onclick="addStudent()"><span class="btn-label">রেজাল্ট যোগ করুন</span></button>
+</div>
 </div>
 
-<div class="admin-list">
-<h4>🗑️ বিদ্যমান রেজাল্ট (ফিল্টার করে খুঁজুন ও প্রয়োজনে মুছে ফেলুন)</h4>
+<div class="admin-block">
+<div class="admin-block-title"><h3>বিদ্যমান রেজাল্ট</h3><span class="ln"></span></div>
 <div class="admin-list-filters">
 <select id="fClass"><option value="">সকল শ্রেণি</option></select>
 <select id="fExam">
@@ -364,7 +595,7 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 <option value="বার্ষিক">বার্ষিক</option>
 </select>
 <select id="fYear"><option value="">সকল সাল</option></select>
-<button type="button" onclick="renderAdminList()">🔍 ফিল্টার করুন</button>
+<button type="button" onclick="renderAdminList()">ফিল্টার করুন</button>
 </div>
 <div class="table-wrap" style="margin-top:14px;">
 <table>
@@ -373,62 +604,47 @@ footer{ background:#043c2e; color:white; text-align:center; padding:30px 15px; l
 </table>
 </div>
 </div>
-</div>
-</div>
-</section>
 
-<footer>
-<b>مدرسة مركز العلوم السلفية للبنات</b><br>
-মারকাজুল উলুম সালাফিয়া মহিলা মাদরাসা<br>
-শরীফবাগ উত্তর-পশ্চিমপাড়া, ধামরাই, ঢাকা<br>
-📞 ০১৬২৪-৪২৯৭৬৫ | ০১৬১৫-৯৯৬৯৬৩<br>
-© <span id="year"></span> MARKAZUL ULUM SALAFIA MAHILA MADRASHA
-</footer>
-
-<!-- ADMIN LOGIN MODAL -->
-<div class="modal-overlay" id="adminModal">
-<div class="modal-box">
-<h3>🔒 অ্যাডমিন লগইন</h3>
-<p>প্যানেলে প্রবেশ করতে পাসওয়ার্ড দিন</p>
-<input id="adminPassInput" type="password" placeholder="পাসওয়ার্ড" onkeydown="if(event.key==='Enter')confirmAdminLogin()">
-<div class="modal-error" id="adminModalError"></div>
-<div class="modal-btns">
-<button class="modal-cancel" onclick="closeAdminModal()">বাতিল</button>
-<button onclick="confirmAdminLogin()">প্রবেশ করুন</button>
-</div>
 </div>
 </div>
 
 <!-- CERTIFICATE TEMPLATE (only visible when printing a single result) -->
 <div id="certificateArea"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 const classes = ["নার্সারি","১ম শ্রেণী","২য় শ্রেণী","৩য় শ্রেণী","৪র্থ শ্রেণী","৫ম শ্রেণী","৬ষ্ঠ শ্রেণী","৭ম শ্রেণী","৮ম শ্রেণী","৯ম শ্রেণী","হিফজ"];
 
-const defaultStudents = [
-  { id:1, name:"উদাহরণ শিক্ষার্থী", father:"উদাহরণ পিতা", mother:"উদাহরণ মাতা", roll:"1001", className:"৫ম শ্রেণী", dept:"কিতাব বিভাগ", examType:"বার্ষিক", year:"2026",
-    subjects:[["বাংলা",85],["ইংরেজি",82],["গণিত",90],["আরবি",88]] }
-];
+const defaultStudents = [];
 
 let students = defaultStudents;
 let captchaA = 0, captchaB = 0;
 
+/* ========== GOOGLE SHEET API (Apps Script Web App) ========== */
+/* এখানে আপনার Apps Script ডিপ্লয় করার পর যে Web App URL পাবেন সেটি বসান */
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwg-3_1ZTaONxQv36aPo6tNESKfM833iQT6gc2z_4uI6Mmlo3lpYlHS57-Ag9zLrrHJaQ/exec";
+
+async function apiPost(payload){
+  const res = await fetch(SHEET_API_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)   // Content-Type হেডার ছাড়া (CORS/preflight সমস্যা এড়াতে)
+  });
+  if(!res.ok) throw new Error(`HTTP error ${res.status}`);
+  return res.json();
+}
+
 async function loadStudents(){
   try{
-    const list = await window.fbLoadStudents();
-    if(list){ students = list; }
+    const res = await apiPost({ action: "getStudents" });
+    if(res && res.success && Array.isArray(res.students)){
+      students = res.students.length ? res.students : defaultStudents;
+    }else{
+      students = defaultStudents;
+    }
   }catch(e){
     console.error("রেজাল্ট লোড করা যায়নি:", e);
     students = defaultStudents;
-  }
-}
-
-async function saveStudents(){
-  try{
-    await window.fbSaveStudents(students);
-  }catch(e){
-    console.error("রেজাল্ট সেভ করা যায়নি:", e);
-    alert("রেজাল্ট সেভ করতে সমস্যা হয়েছে, আবার চেষ্টা করুন। (Firebase কনসোলে Firestore Rules ঠিক আছে কিনা দেখুন)");
   }
 }
 
@@ -498,8 +714,7 @@ async function init(){
   refreshYearOptions();
 }
 
-/* ========== YEAR OPTIONS (built from existing data, so any year/exam
-   the admin adds automatically becomes searchable) ========== */
+/* ========== YEAR OPTIONS ========== */
 function refreshYearOptions(){
   let years = Array.from(new Set(students.map(s => String(s.year)).filter(Boolean)));
   years.sort((a,b) => Number(b) - Number(a));
@@ -516,7 +731,7 @@ function refreshYearOptions(){
   if(years.includes(keepFVal)) fYear.value = keepFVal;
 }
 
-/* ========== RESULT CARD (shared markup builder) ========== */
+/* ========== RESULT CARD ========== */
 function buildResultCardHTML(student){
   return `
     <div class="result-card">
@@ -525,7 +740,10 @@ function buildResultCardHTML(student){
           <div class="student-name">${student.name}</div>
           <div class="meta">রোল: ${student.roll} • ${student.className} • ${student.dept} • ${student.examType || "-"} পরীক্ষা, ${student.year}</div>
         </div>
-        <button class="no-print" onclick="printCertificate(${student.id})">🖨️ প্রিন্ট (মার্কশিট)</button>
+        <div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="printCertificate(${student.id})">প্রিন্ট (মার্কশিট)</button>
+          <button onclick="downloadCertificatePDF(${student.id})">ডাউনলোড (পিডিএফ)</button>
+        </div>
       </div>
       <p style="margin-top:15px"><b>পরীক্ষার বছর:</b> ${student.year}</p>
       <div class="result-table-wrap">
@@ -546,7 +764,7 @@ function buildResultCardHTML(student){
     </div>`;
 }
 
-/* ========== SEARCH (with captcha check) ========== */
+/* ========== SEARCH ========== */
 function searchResults(){
   let roll = document.getElementById("searchRoll").value.trim().toLowerCase();
   let className = document.getElementById("searchClass").value;
@@ -560,7 +778,7 @@ function searchResults(){
   }
 
   if(!checkCaptcha()){
-    document.getElementById("searchOutput").innerHTML = `<div class="result-card">❌ যোগফল সঠিক হয়নি। আবার চেষ্টা করুন।</div>`;
+    document.getElementById("searchOutput").innerHTML = `<div class="result-card">যোগফল সঠিক হয়নি। আবার চেষ্টা করুন।</div>`;
     newCaptcha();
     document.getElementById("searchOutput").scrollIntoView({ behavior:"smooth" });
     return;
@@ -593,7 +811,7 @@ window.addEventListener("afterprint", function(){
   document.body.classList.remove("printing-cert");
 });
 
-/* ========== MARKSHEET / CERTIFICATE (government-marksheet-style layout) ========== */
+/* ========== MARKSHEET / CERTIFICATE ========== */
 
 function certCornerSVG(){
   return `<svg viewBox="0 0 46 46" fill="none">
@@ -604,22 +822,7 @@ function certCornerSVG(){
   </svg>`;
 }
 
-function certSealSVG(){
-  return `<svg viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="47" fill="none" stroke="#a9832c" stroke-width="1.4"/>
-    <circle cx="50" cy="50" r="40" fill="none" stroke="#a9832c" stroke-width="1"/>
-    <g transform="translate(50,50)">
-      <path d="M0,-32 L8,-8 L32,0 L8,8 L0,32 L-8,8 L-32,0 L-8,-8 Z" fill="none" stroke="#07543f" stroke-width="1.6"/>
-      <path d="M0,-32 L8,-8 L32,0 L8,8 L0,32 L-8,8 L-32,0 L-8,-8 Z" transform="rotate(22.5)" fill="none" stroke="#07543f" stroke-width="1"/>
-    </g>
-    <text x="50" y="53" text-anchor="middle" font-size="9" fill="#07543f" font-weight="700" font-family="Noto Sans Bengali, sans-serif">মারকাজুল</text>
-  </svg>`;
-}
-
-function printCertificate(id){
-  const student = students.find(item => item.id === id);
-  if(!student) return;
-
+function buildCertificateHTML(student){
   const rows = student.subjects.map((s, i) => `
     <tr>
       <td style="text-align:center;">${i+1}</td>
@@ -630,7 +833,7 @@ function printCertificate(id){
 
   const passed = status(student) === "উত্তীর্ণ";
 
-  document.getElementById("certificateArea").innerHTML = `
+  return `
     <div class="cert-page">
       <div class="cert-outer">
         <div class="cert-inner">
@@ -679,28 +882,75 @@ function printCertificate(id){
         </div>
       </div>
     </div>`;
+}
 
+function printCertificate(id){
+  const student = students.find(item => item.id === id);
+  if(!student) return;
+
+  document.getElementById("certificateArea").innerHTML = buildCertificateHTML(student);
   startPrint("printing-cert");
 }
 
-/* ========== ADMIN LOGIN (modal instead of prompt) ========== */
-const ADMIN_PASSWORD = "Arif2710";
+/* ========== DOWNLOAD MARKSHEET AS HD PDF ========== */
+async function downloadCertificatePDF(id){
+  const student = students.find(item => item.id === id);
+  if(!student) return;
+
+  const area = document.getElementById("certificateArea");
+  area.innerHTML = buildCertificateHTML(student);
+
+  // Render off-screen (but laid out) so html2canvas can capture it at full size
+  area.style.cssText = "display:block;position:fixed;left:-9999px;top:0;width:794px;background:#fff;";
+
+  const btn = document.querySelector(`.result-card button[onclick="downloadCertificatePDF(${id})"]`);
+  const originalLabel = btn ? btn.textContent : "";
+  if(btn){ btn.disabled = true; btn.textContent = "তৈরি হচ্ছে..."; }
+
+  try{
+    await new Promise(resolve => setTimeout(resolve, 60)); // let images/fonts settle
+    const target = area.querySelector(".cert-page");
+    const canvas = await html2canvas(target, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#ffffff"
+    });
+
+    // PDF page size = exact certificate size, no extra margins/whitespace
+    const PX_TO_MM = 25.4 / 96;
+    const pageWidthMM = target.offsetWidth * PX_TO_MM;
+    const pageHeightMM = target.offsetHeight * PX_TO_MM;
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+      orientation: pageWidthMM > pageHeightMM ? "landscape" : "portrait",
+      unit: "mm",
+      format: [pageWidthMM, pageHeightMM]
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.98);
+    pdf.addImage(imgData, "JPEG", 0, 0, pageWidthMM, pageHeightMM);
+
+    pdf.save(`${student.name}-marksheet-roll-${student.roll}.pdf`);
+  }catch(e){
+    console.error(e);
+    alert("পিডিএফ তৈরি করতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+  }finally{
+    area.style.cssText = "";
+    area.innerHTML = "";
+    if(btn){ btn.disabled = false; btn.textContent = originalLabel; }
+  }
+}
+
+/* ========== ADMIN LOGIN & DEDICATED ADMIN PAGE ========== */
 let adminUnlocked = false;
+let adminPassword = "";
 
-function toggleAdmin(){
-  const panel = document.getElementById("adminPanel");
-
-  if(panel.classList.contains("show")){
-    panel.classList.remove("show");
-    return;
-  }
-
+function adminButtonClick(){
   if(adminUnlocked){
-    panel.classList.add("show");
-    renderAdminList();
+    openAdminPage();
     return;
   }
-
   document.getElementById("adminPassInput").value = "";
   document.getElementById("adminModalError").textContent = "";
   document.getElementById("adminModal").classList.add("show");
@@ -711,20 +961,47 @@ function closeAdminModal(){
   document.getElementById("adminModal").classList.remove("show");
 }
 
-function confirmAdminLogin(){
+async function confirmAdminLogin(){
   const entered = document.getElementById("adminPassInput").value;
+  document.getElementById("adminModalError").textContent = "যাচাই করা হচ্ছে...";
 
-  if(entered === ADMIN_PASSWORD){
-    adminUnlocked = true;
-    closeAdminModal();
-    document.getElementById("adminPanel").classList.add("show");
-    renderAdminList();
-  }else{
-    document.getElementById("adminModalError").textContent = "পাসওয়ার্ড ভুল হয়েছে, আবার চেষ্টা করুন।";
+  try{
+    const res = await apiPost({ action: "login", password: entered });
+    if(res && res.success){
+      adminUnlocked = true;
+      adminPassword = entered;
+      closeAdminModal();
+      openAdminPage();
+    }else{
+      document.getElementById("adminModalError").textContent = "পাসওয়ার্ড ভুল হয়েছে, আবার চেষ্টা করুন।";
+    }
+  }catch(e){
+    console.error(e);
+    document.getElementById("adminModalError").textContent = "সার্ভারের সাথে সংযোগ করা যায়নি, আবার চেষ্টা করুন।";
   }
 }
 
-/* ========== ADMIN RESULT LIST (filter + delete) ========== */
+function openAdminPage(){
+  document.getElementById("adminPageOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+  window.scrollTo(0,0);
+  renderAdminList();
+}
+
+function closeAdminPage(){
+  document.getElementById("adminPageOverlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function adminLogout(){
+  const ok = confirm("আপনি কি লগআউট করতে চান?");
+  if(!ok) return;
+  adminUnlocked = false;
+  adminPassword = "";
+  closeAdminPage();
+}
+
+/* ========== ADMIN RESULT LIST ========== */
 function renderAdminList(){
   const fc = document.getElementById("fClass").value;
   const fy = document.getElementById("fYear").value;
@@ -742,6 +1019,8 @@ function renderAdminList(){
     String(a.roll).localeCompare(String(b.roll))
   );
 
+  updateAdminStats();
+
   const body = document.getElementById("adminListBody");
   if(!list.length){
     body.innerHTML = `<tr><td colspan="7">কোনো রেজাল্ট পাওয়া যায়নি</td></tr>`;
@@ -756,8 +1035,20 @@ function renderAdminList(){
       <td>${s.examType || "-"}</td>
       <td>${s.year}</td>
       <td>${total(s)}</td>
-      <td><button type="button" class="btn-del" onclick="deleteStudent(${s.id})">🗑️ মুছুন</button></td>
+      <td><button type="button" class="btn-del" onclick="deleteStudent(${s.id})">মুছুন</button></td>
     </tr>`).join("");
+}
+
+function updateAdminStats(){
+  const totalEl = document.getElementById("statTotal");
+  if(!totalEl) return;
+  const passCount = students.filter(s => status(s) === "উত্তীর্ণ").length;
+  const failCount = students.length - passCount;
+  const yearCount = new Set(students.map(s => String(s.year))).size;
+  totalEl.textContent = students.length;
+  document.getElementById("statPass").textContent = passCount;
+  document.getElementById("statFail").textContent = failCount;
+  document.getElementById("statYears").textContent = yearCount;
 }
 
 async function deleteStudent(id){
@@ -767,18 +1058,23 @@ async function deleteStudent(id){
   const ok = confirm(`আপনি কি নিশ্চিত "${student.name}" (রোল: ${student.roll}, ${student.className}, ${student.examType || "-"} ${student.year}) এর রেজাল্ট মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।`);
   if(!ok) return;
 
-  students = students.filter(s => s.id !== id);
-  await save();
-  refreshYearOptions();
-  renderAdminList();
-  alert("রেজাল্ট সফলভাবে মুছে ফেলা হয়েছে।");
+  try{
+    const res = await apiPost({ action: "deleteStudent", password: adminPassword, id: id });
+    if(res && res.success){
+      students = students.filter(s => s.id !== id);
+      refreshYearOptions();
+      renderAdminList();
+      alert("রেজাল্ট সফলভাবে মুছে ফেলা হয়েছে।");
+    }else{
+      alert("রেজাল্ট মুছতে সমস্যা হয়েছে" + (res && res.message ? ": " + res.message : ""));
+    }
+  }catch(e){
+    console.error(e);
+    alert("রেজাল্ট মুছতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+  }
 }
 
-/* ========== SAVE / ADD STUDENT ========== */
-async function save(){
-  await saveStudents();
-}
-
+/* ========== ADD STUDENT ========== */
 async function addStudent(){
   let name = document.getElementById("aName").value.trim();
   let father = document.getElementById("aFather").value.trim();
@@ -805,62 +1101,51 @@ async function addStudent(){
     if(!proceed) return;
   }
 
-  let subjects = [
-    ["বাংলা", document.getElementById("aBangla").value || 0],
-    ["ইংরেজি", document.getElementById("aEnglish").value || 0],
-    ["গণিত", document.getElementById("aMath").value || 0],
-    ["আরবি", document.getElementById("aArabic").value || 0]
-  ];
+  const studentData = {
+    name, father, mother, roll, className, dept, examType, year,
+    bangla: document.getElementById("aBangla").value || 0,
+    english: document.getElementById("aEnglish").value || 0,
+    math: document.getElementById("aMath").value || 0,
+    arabic: document.getElementById("aArabic").value || 0
+  };
 
-  students.push({
-    id: Date.now(), name, father, mother, roll, className, dept, examType, year,
-    subjects
-  });
+  const addBtn = document.getElementById("addStudentBtn");
+  if(addBtn){
+    addBtn.disabled = true;
+    addBtn.innerHTML = `<span class="btn-spinner"><span class="spin-ring"></span>যোগ হচ্ছে...</span>`;
+  }
 
-  await save();
-  refreshYearOptions();
-  renderAdminList();
-  alert("রেজাল্ট সফলভাবে যোগ হয়েছে। রোল, শ্রেণি, পরীক্ষার ধরণ ও সাল দিয়ে সার্চ করে দেখুন।");
+  try{
+    const res = await apiPost({ action: "addStudent", password: adminPassword, student: studentData });
+    if(res && res.success){
+      await loadStudents();
+      refreshYearOptions();
+      renderAdminList();
+      alert("রেজাল্ট সফলভাবে যোগ হয়েছে। রোল, শ্রেণি, পরীক্ষার ধরণ ও সাল দিয়ে সার্চ করে দেখুন।");
 
-  document.getElementById("aName").value = "";
-  document.getElementById("aFather").value = "";
-  document.getElementById("aMother").value = "";
-  document.getElementById("aRoll").value = "";
-  document.getElementById("aBangla").value = "";
-  document.getElementById("aEnglish").value = "";
-  document.getElementById("aMath").value = "";
-  document.getElementById("aArabic").value = "";
+      document.getElementById("aName").value = "";
+      document.getElementById("aFather").value = "";
+      document.getElementById("aMother").value = "";
+      document.getElementById("aRoll").value = "";
+      document.getElementById("aBangla").value = "";
+      document.getElementById("aEnglish").value = "";
+      document.getElementById("aMath").value = "";
+      document.getElementById("aArabic").value = "";
+    }else{
+      alert("রেজাল্ট যোগ করতে সমস্যা হয়েছে" + (res && res.message ? ": " + res.message : ""));
+    }
+  }catch(e){
+    console.error(e);
+    alert("রেজাল্ট যোগ করতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+  }finally{
+    if(addBtn){
+      addBtn.disabled = false;
+      addBtn.innerHTML = `<span class="btn-label">রেজাল্ট যোগ করুন</span>`;
+    }
+  }
 }
-</script>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBLMTDXNY50YLrII9d8sTif7woXh707hXU",
-  authDomain: "musmm-69b10.firebaseapp.com",
-  projectId: "musmm-69b10",
-  storageBucket: "musmm-69b10.firebasestorage.app",
-  messagingSenderId: "341478120719",
-  appId: "1:341478120719:web:47ea2771a449c13f66b27a"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const studentsDocRef = doc(db, "site_data", "students");
-
-window.fbLoadStudents = async function(){
-  const snap = await getDoc(studentsDocRef);
-  if(snap.exists() && snap.data().json){ return JSON.parse(snap.data().json); }
-  return null;
-};
-
-window.fbSaveStudents = async function(list){
-  await setDoc(studentsDocRef, { json: JSON.stringify(list) });
-};
-
-window.init();
+init();
 </script>
 
 </body>
